@@ -19,7 +19,7 @@ namespace Template.WPF
     {
         private IHost _host;
         private Mutex _mutex = null;
-        private bool _enableMultipleLaunch = false;
+        private bool _enableMultipleLaunch = true;
 
         public App()
         {

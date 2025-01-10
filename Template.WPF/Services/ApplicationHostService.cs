@@ -10,7 +10,7 @@ namespace Template.WPF.Services
         public Task StartAsync(CancellationToken cancellationToken)
         {
             Settinghelper.SettingLoad();
-            SQLiteFileManager.CreateDatabaseFile();
+            //SQLiteFileManager.CreateDatabaseFile();
             return Task.CompletedTask;
         }
 

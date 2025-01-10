@@ -14,7 +14,7 @@ namespace Template.WPF.ViewModels
         private readonly DialogCoordinator _dialogCoordinator = new DialogCoordinator();
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ReactivePropertySlim<string> Title { get; } = new ReactivePropertySlim<string>("Title");
+        public ReactivePropertySlim<string> Title { get; } = new ReactivePropertySlim<string>("NeoToppas"); //TODO:タイトル
         public ReactivePropertySlim<object> ActiveView { get; } = new ReactivePropertySlim<object>();
         public ReactivePropertySlim<bool> IsProgressDialogOpen { get; } 
         public ReactivePropertySlim<string> ProgressDialogMessage { get; }
@@ -54,7 +54,7 @@ namespace Template.WPF.ViewModels
             });
 
             // 初期画面の表示
-            _navigation.NavigateTo<LoginView>();
+            _navigation.NavigateTo<HomeView>();
         }
     }
 }

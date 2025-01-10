@@ -1,6 +1,8 @@
-﻿using Reactive.Bindings;
+﻿using NeoToppas.WPF.Services;
+using Reactive.Bindings;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 using Template.Domain.Entities;
@@ -29,6 +31,11 @@ namespace Template.WPF.ViewModels
 
         public ObservableCollection<MenuButtonEntity> MenuButtons { get; } = new ObservableCollection<MenuButtonEntity>();
 
+        /// <summary>
+		/// コマンドライン引数
+		/// </summary>
+		private readonly List<string> args = new(Environment.GetCommandLineArgs());
+
 
         public HomeViewModel(TransitionService navigation, MessageService message, DialogService dialogService)
         {
@@ -42,7 +49,7 @@ namespace Template.WPF.ViewModels
             // 表示メニューボタンの設定
             MenuButtons.Add(new MenuButtonEntity("テスト", () =>
             {
-                _message.ShowSnackbar(AppDataHelper.Instance.LoginUser);
+                _message.ShowSnackbar("this is a test");
             }));
 
             SettingMenuButton = new ReactiveCommand().WithSubscribe(async () =>
@@ -89,6 +96,12 @@ namespace Template.WPF.ViewModels
                     Application.Current.Shutdown();
                 }
             });
+            if (CommonConst.ENABLE_AUTOUPDATE)
+            {
+                Update();//TODO:確認
+            }
+
+
         }
 
         private string GetApplicationName()
@@ -100,6 +113,34 @@ namespace Template.WPF.ViewModels
                 return appName;
             }
             return appName.Substring(0, point);
+        }
+
+
+        private void Update()
+        {
+            if (args.Any(a => a == "/up") == false)
+            {
+                // 今回は実験なので拡張子がtxtのだけ更新
+                // Todo:確認 
+                ApplicationUpdate update = new();
+                if (!Directory.Exists(CommonConst.DATA_FOLDER))
+                {
+                    _message.ShowSnackbar("【エラー】更新ファイルの格納フォルダにアクセス失敗！！");
+                }
+                else if (update.Update(CommonConst.DATA_FOLDER, null) == true) //データ格納場所
+                {
+                     _message.ShowSnackbar("更新チェック完了 更新なし");
+                }
+
+            }
+            else
+            {
+                // コマンドライン引数に「/up」があれば更新処理があったので拡張子が「delete」の古いファイルを取得し削除
+                foreach (var f in Directory.GetFiles(Environment.CurrentDirectory, "*.delete"))
+                {
+                    File.Delete(f);
+                }
+            }
         }
     }
 }
