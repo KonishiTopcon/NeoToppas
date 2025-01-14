@@ -15,59 +15,18 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="200" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Center"
-                   VerticalAlignment="Bottom"
-                   Style="{StaticResource MaterialDesignHeadline1TextBlock}"
-                   Text="{Binding AppText.Value}" />
 
-        <ScrollViewer Grid.Row="1"
-                      HorizontalScrollBarVisibility="Disabled"
-                      VerticalScrollBarVisibility="Auto">
-            <StackPanel VerticalAlignment="Center">
-                <ItemsControl Margin="5,0"
-                              ItemsSource="{Binding MenuButtons}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button Width="300"
-                                    Height="60"
-                                    Margin="0,0,0,80"
-                                    Command="{Binding Command}"
-                                    IsDefault="True">
-                                <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                                           Text="{Binding Text}" />
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </ScrollViewer>
-
-        <StackPanel Grid.Row="2"
-                    Orientation="Horizontal">
-            <Button Margin="5,0,0,0"
-                    Command="{Binding InformationButton}"
-                    Content="{materialDesign:PackIcon Kind=InformationOutline,
-                                                      Size=32}"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                    Style="{StaticResource MaterialDesignIconButton}"
-                    ToolTip="MaterialDesignIconForegroundButton" />
-            <Button Command="{Binding SettingMenuButton}"
-                    Content="{materialDesign:PackIcon Kind=GearOutline,
-                                                      Size=32}"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                    Style="{StaticResource MaterialDesignIconButton}"
-                    ToolTip="MaterialDesignIconForegroundButton" />
-            <TextBlock Grid.Row="2"
-                       VerticalAlignment="Center"
-                       Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                       Text="{Binding VersionNo.Value}"
-                       TextAlignment="Left" />
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Margin="15,0,0,0" Command="{Binding DBSelect1Button}" Content="①データ表示" IsEnabled="true"/>
+            <Button Margin="15,0,0,0" Command="{Binding DBInsert1Button}" Content="②データ挿入"/>
+            <Button Margin="15,0,0,0" Command="{Binding DBUpdate1Button}" Content="③データ更新"/>
+            <Button Margin="15,0,0,0" Command="{Binding DBDelete1Button}" Content="④データ削除"/>
         </StackPanel>
-
+        <DataGrid ItemsSource="{Binding TradingCompanyTbl.Value.DefaultView}" Margin="20,20,20,20"  AutoGenerateColumns="True" Grid.Row="1"/>
         <StackPanel Grid.Row="2"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
