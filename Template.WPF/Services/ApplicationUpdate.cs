@@ -25,12 +25,13 @@ namespace NeoToppas.WPF.Services
             bool result = true;
             // 更新判定
             bool isUpdate = false;
+            bool EnableDriveChk = false;  
             try
             {
                 // 論理ドライブの一覧を取得する
                 List<string> drive = new(Directory.GetLogicalDrives());
                 // 論理ドライブに引数で指定されたドライブが存在すれば処理を続行(ネットワークドライブ未接続対策)
-                if (drive.Any(d => d == Path.GetPathRoot(path)) == true)
+                if (drive.Any(d => d == Path.GetPathRoot(path)) == true || !EnableDriveChk)
                 {
                     List<string> newFile = new();
                     List<string> myFile = new();

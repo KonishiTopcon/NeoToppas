@@ -2,8 +2,10 @@
 using Reactive.Bindings;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Windows;
 using Template.Domain.Entities;
 using Template.Domain.Helpers;
@@ -11,6 +13,7 @@ using Template.Infrastructure.SQLite;
 using Template.WPF.Services;
 using Template.WPF.UIEntities;
 using Template.WPF.Views;
+using System.Windows.Shapes;
 
 namespace Template.WPF.ViewModels
 {
@@ -98,7 +101,7 @@ namespace Template.WPF.ViewModels
             });
             if (CommonConst.ENABLE_AUTOUPDATE)
             {
-                Update();//TODO:確認
+                Update();
             }
 
 
@@ -121,15 +124,41 @@ namespace Template.WPF.ViewModels
             if (args.Any(a => a == "/up") == false)
             {
                 // 今回は実験なので拡張子がtxtのだけ更新
-                // Todo:確認 
+                // Todo:アップデート機能要監視 
                 ApplicationUpdate update = new();
+
                 if (!Directory.Exists(CommonConst.DATA_FOLDER))
                 {
-                    _message.ShowSnackbar("【エラー】更新ファイルの格納フォルダにアクセス失敗！！");
+                    MessageBox.Show("自動アップデート失敗！\r\n最新アプリの格納フォルダにアクセスできません！！", "エラー",MessageBoxButton.OK,MessageBoxImage.Error);
                 }
-                else if (update.Update(CommonConst.DATA_FOLDER, null) == true) //データ格納場所
+                else 
                 {
-                     _message.ShowSnackbar("更新チェック完了 更新なし");
+                    if (!File.Exists(Directory.GetParent(CommonConst.DATA_FOLDER).ToString() + @"\NeoToppasLatestVersionTXT.txt"))
+                    {
+                        MessageBox.Show("自動アップデート失敗！\r\n最新バージョン情報ファイルにアクセスできません！！", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    }
+                    else
+                    {
+                        StreamReader sr = new StreamReader(Directory.GetParent(CommonConst.DATA_FOLDER).ToString() + @"\NeoToppasLatestVersionTXT.txt");
+
+                        string str;
+                        str = sr.ReadLine();
+                        sr.Close();
+
+                        if (str == CommonConst.APP_VERSION)
+                        {
+                            //更新なし
+                           
+                        }
+                        else
+                        {
+                            if (update.Update(CommonConst.DATA_FOLDER, null) == true) //データ格納場所
+                            {
+                                //更新なし
+                            }
+                        }
+                    }
                 }
 
             }
