@@ -12,9 +12,11 @@
     <!--<UserControl.DataContext>
         <vm:HomeViewModel />
     </UserControl.DataContext>-->
+    
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
             <RowDefinition Height="60" />
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
@@ -26,8 +28,15 @@
             <Button Margin="15,0,0,0" Command="{Binding DBUpdate1Button}" Content="③データ更新"/>
             <Button Margin="15,0,0,0" Command="{Binding DBDelete1Button}" Content="④データ削除"/>
         </StackPanel>
-        <DataGrid ItemsSource="{Binding TradingCompanyTbl.Value.DefaultView}" Margin="20,20,20,20"  AutoGenerateColumns="True" Grid.Row="1"/>
-        <StackPanel Grid.Row="2"
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Background="White">
+            <TextBlock Text="カラム1:" Width="100"  Height="35"  FontSize="20"/>
+            <TextBox x:Name="param1Input" Width="100" Height="35"   FontSize="20" Text="{Binding param1Input.Value}"/>
+            <TextBlock Text="カラム2:" Width="100"  Height="35" FontSize="20"  />
+            <TextBox x:Name="param2Input" Width="100" Height="35" FontSize="20" Text="{Binding param2Input.Value}"/>
+        </StackPanel>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding TradingCompanyTbl.Value.DefaultView}" Margin="20,20,20,20"  AutoGenerateColumns="True"  IsReadOnly="True"
+                  Background="White" BorderThickness="0.1" BorderBrush="Gray" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" />
+        <StackPanel Grid.Row="3"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
             <Button Width="100"

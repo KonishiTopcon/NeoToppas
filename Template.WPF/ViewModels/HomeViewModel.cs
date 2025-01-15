@@ -19,6 +19,7 @@ using Npgsql;
 using System.Transactions;
 using System.Diagnostics;
 using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
+using NeoToppas.Infrastructure.Postgres;
 
 namespace Template.WPF.ViewModels
 {
@@ -32,7 +33,8 @@ namespace Template.WPF.ViewModels
         public ReactivePropertySlim<string> AppText { get; } = new ReactivePropertySlim<string>();
         public ReactivePropertySlim<string> VersionNo { get; } = new ReactivePropertySlim<string>("Ver " + Assembly.GetExecutingAssembly().GetName().Version);
         public ReactivePropertySlim<DataTable> TradingCompanyTbl { get; set; } = new ReactivePropertySlim<DataTable>(new DataTable());
-
+        public ReactivePropertySlim<string> param1Input { get; } = new ReactivePropertySlim<string>();
+        public ReactivePropertySlim<string> param2Input { get; } = new ReactivePropertySlim<string>();
         public ReactiveCommand SettingMenuButton { get; }
         public ReactiveCommand InformationButton { get; }
         public ReactiveCommand ApplicationHaltButton { get; }
@@ -54,12 +56,10 @@ namespace Template.WPF.ViewModels
             _navigation = navigation;
             _message = message;
             _dialog = dialogService;
-
+            param1Input.Value = "";
+            param2Input.Value = "";
             // アプリケーション名の設定
             AppText.Value = GetApplicationName();
-
-           
-
 
             SettingMenuButton = new ReactiveCommand().WithSubscribe(async () =>
             {
@@ -106,43 +106,36 @@ namespace Template.WPF.ViewModels
                 }
             });
 
-
             DBSelect1Button = new ReactiveCommand().WithSubscribe(() =>
             {
-                string conn_str = "Server=10.192.139.9; Port=5432; User Id=konishi; Password=konishi; Database=NeoToppas;Enlist=true";
                 try 
-                { 
-                    //TransactionScopeの利用
-                    using (TransactionScope ts = new TransactionScope())
+                {
+                    string cmd_str = "SELECT * FROM public.\"TradingCompany\" ORDER BY \"TradingCompanyCode\" ASC";
+                    TradingCompanyTbl.Value = PostgresBase.GetDataTable(cmd_str);
+                    //SELECT結果表示
+                    for (int i = 0; i < TradingCompanyTbl.Value.Rows.Count; i++)
                     {
-                        using (NpgsqlConnection conn2 = new NpgsqlConnection(conn_str))
-                        {
-                            NpgsqlCommand cmd = null;
-                            string cmd_str = null;
-                            NpgsqlDataAdapter da = null;
-
-                            //PostgreSQLへ接続後、SELECT結果を取得
-                            conn2.Open();
-
-                            //SELECT処理
-                            cmd_str = "SELECT * FROM public.\"TradingCompany\" ORDER BY \"TradingCompanyCode\" ASC"; 
-                            cmd = new NpgsqlCommand(cmd_str, conn2);
-                            da = new NpgsqlDataAdapter(cmd);
-                            DataTable dt = new DataTable();
-                            da.Fill(dt);
-                            TradingCompanyTbl.Value = dt;
-
-                            //SELECT結果表示
-                            for (int i = 0; i < TradingCompanyTbl.Value.Rows.Count; i++)
-                            {
-                                Debug.WriteLine("(col1, col2) = (" + TradingCompanyTbl.Value.Rows[i][0] + ", " + TradingCompanyTbl.Value.Rows[i][1] + ")");
-                            }
-                        }
+                        Debug.WriteLine("(col1, col2) = (" + TradingCompanyTbl.Value.Rows[i][0] + ", " + TradingCompanyTbl.Value.Rows[i][1] + ")");
                     }
+                    
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"データベースエラー: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"データベースエラー1: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
+
+            DBInsert1Button = new ReactiveCommand().WithSubscribe(() =>
+            {
+                try
+                {
+                    string cmd_str = String.Concat("Insert into public.\"TradingCompany\"(\"TradingCompanyCode\",\"TradingCompanyName\") Values(",
+                        param1Input,",'",param2Input,"')");
+                    int result = PostgresBase.InsertDataTable(cmd_str);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"データベースエラー2: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
 
