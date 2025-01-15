@@ -146,14 +146,32 @@ namespace Template.WPF.ViewModels
                     string cmd_str = String.Concat("update public.\"TradingCompany\" Set \"TradingCompanyName\" = '",param2Input,"' where \"TradingCompanyCode\" ='",param1Input,"'");
                     int result = PostgresBase.UpdateDataTable(cmd_str);
                     DBSelect1_Exe();
-                    if (result == 1) _message.ShowSnackbar("登録成功");
-                    else _message.ShowErrorDialog("エラー", "登録失敗");
+                    if (result == 1) _message.ShowSnackbar("更新成功");
+                    else _message.ShowErrorDialog("エラー", "更新失敗");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"データベースエラー2: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"データベースエラー3: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
+
+            DBDelete1Button = new ReactiveCommand().WithSubscribe(() =>
+            {
+                try
+                {
+                    string cmd_str = String.Concat("delete from public.\"TradingCompany\" where \"TradingCompanyCode\" = '", param1Input, "'");
+                    int result = PostgresBase.DeleteDataTable(cmd_str);
+                    DBSelect1_Exe();
+                    if (result == 1) _message.ShowSnackbar("削除成功");
+                    else _message.ShowErrorDialog("エラー", "削除失敗");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"データベースエラー4: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
+
+
 
             if (CommonConst.ENABLE_AUTOUPDATE)
             {
