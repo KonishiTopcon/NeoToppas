@@ -12,7 +12,6 @@
     <!--<UserControl.DataContext>
         <vm:HomeViewModel />
     </UserControl.DataContext>-->
-    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -30,11 +29,12 @@
         </StackPanel>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Background="White">
             <TextBlock Text="カラム1:" Width="100"  Height="35"  FontSize="20"/>
-            <TextBox x:Name="param1Input" Width="100" Height="35"   FontSize="20" Text="{Binding param1Input.Value}"/>
+            <TextBox x:Name="param1Input" Width="200" Height="35"   FontSize="20" Text="{Binding param1Input.Value}"/>
             <TextBlock Text="カラム2:" Width="100"  Height="35" FontSize="20"  />
-            <TextBox x:Name="param2Input" Width="100" Height="35" FontSize="20" Text="{Binding param2Input.Value}"/>
+            <TextBox x:Name="param2Input" Width="200" Height="35" FontSize="20" Text="{Binding param2Input.Value}"/>
         </StackPanel>
-        <DataGrid Grid.Row="2" ItemsSource="{Binding TradingCompanyTbl.Value.DefaultView}" Margin="20,20,20,20"  AutoGenerateColumns="True"  IsReadOnly="True"
+        <DataGrid x:Name="CompanyDataGrid" Grid.Row="2" ItemsSource="{Binding TradingCompanyTbl}" Margin="20,20,20,20"  AutoGenerateColumns="True"  IsReadOnly="True"
+                  SelectedItem="{Binding SelectedTradingCompany, Mode=TwoWay}" 
                   Background="White" BorderThickness="0.1" BorderBrush="Gray" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" />
         <StackPanel Grid.Row="3"
                     HorizontalAlignment="Right"
@@ -48,6 +48,5 @@
                     Command="{Binding ApplicationHaltButton}"
                     Content="終了" />
         </StackPanel>
-
     </Grid>
 </UserControl>

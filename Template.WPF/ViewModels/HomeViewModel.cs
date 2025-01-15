@@ -20,6 +20,7 @@ using System.Transactions;
 using System.Diagnostics;
 using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
 using NeoToppas.Infrastructure.Postgres;
+using NeoToppas.Domain.Entities;
 
 namespace Template.WPF.ViewModels
 {
@@ -32,9 +33,23 @@ namespace Template.WPF.ViewModels
 
         public ReactivePropertySlim<string> AppText { get; } = new ReactivePropertySlim<string>();
         public ReactivePropertySlim<string> VersionNo { get; } = new ReactivePropertySlim<string>("Ver " + Assembly.GetExecutingAssembly().GetName().Version);
-        public ReactivePropertySlim<DataTable> TradingCompanyTbl { get; set; } = new ReactivePropertySlim<DataTable>(new DataTable());
+        public ObservableCollection<TradingCompanyEntities> TradingCompanyTbl { get; set; } = new ObservableCollection<TradingCompanyEntities>();
         public ReactivePropertySlim<string> param1Input { get; } = new ReactivePropertySlim<string>();
         public ReactivePropertySlim<string> param2Input { get; } = new ReactivePropertySlim<string>();
+        private TradingCompanyEntities _selectedTradingCompany;
+        public TradingCompanyEntities SelectedTradingCompany
+        {
+            get => _selectedTradingCompany;
+            set
+            {
+                if (_selectedTradingCompany != value)
+                {
+                    _selectedTradingCompany = value;
+                    OnPropertyChanged(nameof(SelectedTradingCompany));
+                    OnSelectedTradingCompanyChanged();
+                }
+            }
+        }
         public ReactiveCommand SettingMenuButton { get; }
         public ReactiveCommand InformationButton { get; }
         public ReactiveCommand ApplicationHaltButton { get; }
@@ -43,13 +58,10 @@ namespace Template.WPF.ViewModels
         public ReactiveCommand DBInsert1Button { get; }
         public ReactiveCommand DBUpdate1Button { get; }
         public ReactiveCommand DBDelete1Button { get; }
+        public ReactiveCommand CompanyGridSelectionChanged { get; }
 
         public ObservableCollection<MenuButtonEntity> MenuButtons { get; } = new ObservableCollection<MenuButtonEntity>();
-        /// <summary>
-		/// コマンドライン引数
-		/// </summary>
-		private readonly List<string> args = new(Environment.GetCommandLineArgs());
-
+        private readonly List<string> args = new(Environment.GetCommandLineArgs());
 
         public HomeViewModel(TransitionService navigation, MessageService message, DialogService dialogService)
         {
@@ -58,7 +70,6 @@ namespace Template.WPF.ViewModels
             _dialog = dialogService;
             param1Input.Value = "";
             param2Input.Value = "";
-            // アプリケーション名の設定
             AppText.Value = GetApplicationName();
 
             SettingMenuButton = new ReactiveCommand().WithSubscribe(async () =>
@@ -108,21 +119,7 @@ namespace Template.WPF.ViewModels
 
             DBSelect1Button = new ReactiveCommand().WithSubscribe(() =>
             {
-                try 
-                {
-                    string cmd_str = "SELECT * FROM public.\"TradingCompany\" ORDER BY \"TradingCompanyCode\" ASC";
-                    TradingCompanyTbl.Value = PostgresBase.GetDataTable(cmd_str);
-                    //SELECT結果表示
-                    for (int i = 0; i < TradingCompanyTbl.Value.Rows.Count; i++)
-                    {
-                        Debug.WriteLine("(col1, col2) = (" + TradingCompanyTbl.Value.Rows[i][0] + ", " + TradingCompanyTbl.Value.Rows[i][1] + ")");
-                    }
-                    
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"データベースエラー1: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                DBSelect1_Exe();
             });
 
             DBInsert1Button = new ReactiveCommand().WithSubscribe(() =>
@@ -130,8 +127,11 @@ namespace Template.WPF.ViewModels
                 try
                 {
                     string cmd_str = String.Concat("Insert into public.\"TradingCompany\"(\"TradingCompanyCode\",\"TradingCompanyName\") Values(",
-                        param1Input,",'",param2Input,"')");
+                        param1Input, ",'", param2Input, "')");
                     int result = PostgresBase.InsertDataTable(cmd_str);
+                    DBSelect1_Exe();
+                    if (result == 1) _message.ShowSnackbar("登録成功");
+                    else _message.ShowErrorDialog("エラー", "登録失敗");
                 }
                 catch (Exception ex)
                 {
@@ -139,10 +139,42 @@ namespace Template.WPF.ViewModels
                 }
             });
 
-            //自動アップデート確認
             if (CommonConst.ENABLE_AUTOUPDATE)
             {
                 Update();
+            }
+        }
+
+        private void OnSelectedTradingCompanyChanged()
+        {
+            if (SelectedTradingCompany != null)
+            {
+                //MessageBox.Show($"選択された会社: {SelectedTradingCompany.TradingCompanyName}", "情報", MessageBoxButton.OK, MessageBoxImage.Information);
+                param1Input.Value = SelectedTradingCompany.TradingCompanyCode.ToString();
+                param2Input.Value = SelectedTradingCompany.TradingCompanyName;
+
+            }
+        }
+
+        private void DBSelect1_Exe()
+        {
+            try
+            {
+                string cmd_str = "SELECT * FROM public.\"TradingCompany\" ORDER BY \"TradingCompanyCode\" ASC";
+                var dataTable = PostgresBase.GetDataTable(cmd_str);
+                TradingCompanyTbl.Clear();
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    TradingCompanyTbl.Add(new TradingCompanyEntities
+                    {
+                        TradingCompanyCode = Convert.ToInt32(row["TradingCompanyCode"]),
+                        TradingCompanyName = row["TradingCompanyName"].ToString()
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"データベースエラー1: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -157,25 +189,21 @@ namespace Template.WPF.ViewModels
             return appName.Substring(0, point);
         }
 
-
         private void Update()
         {
             if (args.Any(a => a == "/up") == false)
             {
-                // 今回は実験なので拡張子がtxtのだけ更新
-                // Todo:アップデート機能要監視 
                 ApplicationUpdate update = new();
 
                 if (!Directory.Exists(CommonConst.DATA_FOLDER))
                 {
-                    MessageBox.Show("自動アップデート失敗！\r\n最新アプリの格納フォルダにアクセスできません！！", "エラー",MessageBoxButton.OK,MessageBoxImage.Error);
+                    MessageBox.Show("自動アップデート失敗！\r\n最新アプリの格納フォルダにアクセスできません！！", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                else 
+                else
                 {
                     if (!File.Exists(Directory.GetParent(CommonConst.DATA_FOLDER).ToString() + @"\NeoToppasLatestVersionTXT.txt"))
                     {
                         MessageBox.Show("自動アップデート失敗！\r\n最新バージョン情報ファイルにアクセスできません！！", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-
                     }
                     else
                     {
@@ -187,28 +215,28 @@ namespace Template.WPF.ViewModels
 
                         if (str == CommonConst.APP_VERSION)
                         {
-                            //更新なし
-                           
                         }
                         else
                         {
-                            if (update.Update(CommonConst.DATA_FOLDER, null) == true) //データ格納場所
+                            if (update.Update(CommonConst.DATA_FOLDER, null) == true)
                             {
-                                //更新なし
                             }
                         }
                     }
                 }
-
             }
             else
             {
-                // コマンドライン引数に「/up」があれば更新処理があったので拡張子が「delete」の古いファイルを取得し削除
                 foreach (var f in Directory.GetFiles(Environment.CurrentDirectory, "*.delete"))
                 {
                     File.Delete(f);
                 }
             }
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
