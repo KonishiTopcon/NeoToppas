@@ -139,10 +139,27 @@ namespace Template.WPF.ViewModels
                 }
             });
 
+            DBUpdate1Button = new ReactiveCommand().WithSubscribe(() =>
+            {
+                try
+                {
+                    string cmd_str = String.Concat("update public.\"TradingCompany\" Set \"TradingCompanyName\" = '",param2Input,"' where \"TradingCompanyCode\" ='",param1Input,"'");
+                    int result = PostgresBase.UpdateDataTable(cmd_str);
+                    DBSelect1_Exe();
+                    if (result == 1) _message.ShowSnackbar("登録成功");
+                    else _message.ShowErrorDialog("エラー", "登録失敗");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"データベースエラー2: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
+
             if (CommonConst.ENABLE_AUTOUPDATE)
             {
-                Update();
+                Update(); //プログラムの自動アップデート
             }
+            DBSelect1_Exe();
         }
 
         private void OnSelectedTradingCompanyChanged()

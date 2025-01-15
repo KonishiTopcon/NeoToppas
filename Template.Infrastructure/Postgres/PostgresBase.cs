@@ -66,5 +66,25 @@ namespace NeoToppas.Infrastructure.Postgres
                 }
             }
         }
+
+        public static int UpdateDataTable(String sql)
+        {
+            //TransactionScopeの利用
+            using (TransactionScope ts = new TransactionScope())
+            {
+                using (NpgsqlConnection con = new NpgsqlConnection(conn_str))
+                {
+                    string cmd_str = null;
+                    NpgsqlDataAdapter da = null;
+
+                    //PostgreSQLへ接続後、SELECT結果を取得
+                    con.Open();
+                    using var cmd = new NpgsqlCommand(sql, con);
+                    int result = cmd.ExecuteNonQuery();
+                    ts.Complete();//トランザクションのコミット
+                    return result;
+                }
+            }
+        }
     }
 }
