@@ -33,9 +33,29 @@
             <TextBlock Text="カラム2:" Width="100"  Height="35" FontSize="20"  />
             <TextBox x:Name="param2Input" Width="200" Height="35" FontSize="20" Text="{Binding param2Input.Value}"/>
         </StackPanel>
-        <DataGrid x:Name="CompanyDataGrid" Grid.Row="2" ItemsSource="{Binding TradingCompanyTbl}" Margin="20,20,20,20"  AutoGenerateColumns="True"  IsReadOnly="True"
-                  SelectedItem="{Binding SelectedTradingCompany, Mode=TwoWay}" 
-                  Background="White" BorderThickness="0.1" BorderBrush="Gray" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" />
+        <DataGrid x:Name="CompanyDataGrid" 
+          Grid.Row="2" 
+          ItemsSource="{Binding TradingCompanyTbl}" 
+          Margin="20,20,20,20"  
+          AutoGenerateColumns="False"  
+          IsReadOnly="True"
+          SelectedItem="{Binding SelectedTradingCompany, Mode=TwoWay}" 
+          Background="White" 
+          BorderThickness="0.1" 
+          BorderBrush="Gray" 
+          HorizontalGridLinesBrush="Gray" 
+          VerticalGridLinesBrush="Gray">
+
+            <!-- カラム定義 -->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="会社コード" 
+                            Binding="{Binding TradingCompanyCode}" 
+                            Width="*" />
+                <DataGridTextColumn Header="会社名" 
+                            Binding="{Binding TradingCompanyName}" 
+                            Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
         <StackPanel Grid.Row="3"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
