@@ -7,8 +7,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:MahAppsBundledTheme BaseTheme="Light"
-                                                    PrimaryColor="DeepPurple"
-                                                    SecondaryColor="DeepPurple" />
+                                                    PrimaryColor="Indigo"
+                                                    SecondaryColor="Indigo" />
 
                 <!--  MahApps  -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
@@ -26,7 +26,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Flyout.xaml" />
 
-
+                <!-- ShowMeTheXaml -->
+                <ResourceDictionary Source="pack://application:,,,/ShowMeTheXAML.AvalonEdit;component/Themes/xamldisplayer.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
 
