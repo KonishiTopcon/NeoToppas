@@ -2,6 +2,7 @@
 using MaterialDesignThemes.Wpf;
 using Reactive.Bindings;
 using System.ComponentModel;
+using System.Windows;
 using Template.WPF.Services;
 using Template.WPF.Views;
 
@@ -55,6 +56,17 @@ namespace Template.WPF.ViewModels
 
             // 初期画面の表示
             _navigation.NavigateTo<HomeView>();
+        }
+
+
+        public void TreeSelectedChange(string name)
+        {
+            //SnackbarMessages.Value.Enqueue($"Selected Item: {name}");
+            //MessageBox.Show($"選択項目：{name}");
+            if (name == "PartsSearch"  && ActiveView.Value is not Template.WPF.Views.HomeView)
+                _navigation.NavigateTo<HomeView>();
+            else if (name == "License" && ActiveView.Value is not Template.WPF.Views.LicenseView)
+                _navigation.NavigateTo<LicenseView>();
         }
     }
 }
