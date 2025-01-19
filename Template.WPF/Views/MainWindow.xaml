@@ -37,7 +37,7 @@
         </materialDesign:DialogHost.DialogContent>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="{Binding SidebarWidth.Value}"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <materialDesign:Snackbar Panel.ZIndex="1"
@@ -122,8 +122,24 @@ Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type
                         <TreeViewItem Header="Empty" />
                     </TreeView>
                 </smtx:XamlDisplay>
-            <ContentControl Content="{Binding ActiveView.Value}" Grid.Column="1"
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding SidebarText.Value}" FontSize="15" FontWeight="Bold" Width="200">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding SidebarTextMouseUp}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    </TextBlock>
+                </StackPanel>
+                <ContentControl Content="{Binding ActiveView.Value}" Grid.Row="1"
                             Focusable="False" />
+            </Grid>
+
         </Grid>
     </materialDesign:DialogHost>
 </metro:MetroWindow>
