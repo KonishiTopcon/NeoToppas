@@ -27,21 +27,22 @@
             <TextBlock Text="棚番号" Width="100"  Height="35" FontSize="20"/>
             <TextBox x:Name="ShelfNo" Width="100" Height="35"   FontSize="20" Text="{Binding ShelfNo.Value}"/>
             <TextBlock Text="入庫日" Width="100"  Height="35" Margin="50,0,0,0" FontSize="20"  />
-            <TextBox x:Name="ArrivalDate" Width="100" Height="35" FontSize="20" Text="{Binding ArrivalDate.Value}"/>
+            <DatePicker  x:Name="ArrivalDate" Width="150" Height="35" FontSize="20" SelectedDate="{Binding ArrivalDate.Value}"/>
+            <!--<TextBox x:Name="ArrivalDate" Width="100" Height="35" FontSize="20" Text="{Binding ArrivalDate.Value}"/>-->
             <TextBlock Text="数量" Width="100"  Height="35" Margin="50,0,0,0" FontSize="20"  />
             <TextBox x:Name="Count" Width="100" Height="35" FontSize="20" Text="{Binding Quantity.Value}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" HorizontalAlignment="Left" Margin="30,0,30,0" Orientation="Horizontal" Background="White">
             <TextBlock Text="品名コード" Width="100"  Height="35"  FontSize="20"/>
-            <TextBox x:Name="ItemCode" Width="100" Height="35"   FontSize="20" Text="{Binding ItemCode.Value}"/>
+            <TextBox x:Name="ItemCode" Width="130" Height="35"   FontSize="20" Text="{Binding ItemCode.Value}"/>
             <TextBlock Text="品名" Width="100"  Height="35" Margin="50,0,0,0"  FontSize="20"/>
-            <TextBox x:Name="ItemName" Width="100" Height="35"   FontSize="20" Text="{Binding ItemName.Value}"/>
+            <TextBox x:Name="ItemName" Width="130" Height="35"   FontSize="20" Text="{Binding ItemName.Value}"/>
             <TextBlock Text="レビジョン" Width="100"  Height="35"  Margin="50,0,0,0" FontSize="20"/>
             <TextBox x:Name="RevNo" Width="100" Height="35"   FontSize="20" Text="{Binding RevNo.Value}"/>
         </StackPanel>
         <StackPanel Grid.Row="3" HorizontalAlignment="Left" Margin="30,0,30,0" Orientation="Horizontal" Background="White">
             <TextBlock Text="注文番号" Width="100"  Height="35"  FontSize="20"/>
-            <TextBox x:Name="OrderNo" Width="100" Height="35"   FontSize="20" Text="{Binding OrderNo.Value}"/>
+            <TextBox x:Name="OrderNo" Width="130" Height="35"   FontSize="20" Text="{Binding OrderNo.Value}"/>
             <TextBlock Text="コスト" Width="100"  Height="35"  Margin="50,0,0,0" FontSize="20"/>
             <TextBox x:Name="CostNo" Width="100" Height="35"   FontSize="20" Text="{Binding Cost.Value}"/>
             <TextBlock Text="リール番号" Width="100"  Height="35"  Margin="50,0,0,0" FontSize="20"/>

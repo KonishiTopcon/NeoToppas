@@ -16,7 +16,7 @@ namespace NeoToppas.WPF.Services
 
         //ラベル印刷
         public static string TEMPLATE_DIRECTORY = @"C:\Users\l057277\OneDrive - Topcon\ドキュメント\各種案件\7.TOPPAS置き換え\3.ラベルプリンタ\ブラザーラベルプリンタ\テンプレート\";
-        private const string TEMPLATE_FILE = "PCBtemplate1.LBX";
+        public static string TEMPLATE_FILE = "PCBtemplate1.LBX";
 
     }
 }
