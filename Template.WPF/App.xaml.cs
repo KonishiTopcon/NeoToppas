@@ -121,6 +121,8 @@ namespace Template.WPF
             services.AddTransient<LicenseViewModel>();
             services.AddTransient<SettingView>();
             services.AddTransient<SettingViewModel>();
+            services.AddTransient<LabelView>();
+            services.AddTransient<LabelViewModel>();
         }
     }
 }

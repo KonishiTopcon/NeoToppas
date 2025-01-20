@@ -21,7 +21,7 @@ namespace Template.WPF.ViewModels
         public ReactivePropertySlim<bool> IsProgressDialogOpen { get; }
         public ReactivePropertySlim<string> ProgressDialogMessage { get; }
         public ReactivePropertySlim<string> SidebarText { get; } = new ReactivePropertySlim<string>("<");
-        public ReactivePropertySlim<double> SidebarWidth { get; } = new ReactivePropertySlim<double>(140);
+        public ReactivePropertySlim<double> SidebarWidth { get; } = new ReactivePropertySlim<double>(180);
         public ReactivePropertySlim<SnackbarMessageQueue> SnackbarMessages { get; }
 
         public ReactiveCommand Loaded { get; }
@@ -80,7 +80,7 @@ namespace Template.WPF.ViewModels
             else
             {
                 SidebarText.Value = "<";
-                SidebarWidth.Value = 140;
+                SidebarWidth.Value = 180;
             }
         }
 
@@ -95,6 +95,10 @@ namespace Template.WPF.ViewModels
                 case "License":
                     if (ActiveView.Value is not LicenseView)
                         _navigation.NavigateTo<LicenseView>();
+                    break;
+                case "PartsLabelPrint":
+                    if (ActiveView.Value is not LabelView)
+                        _navigation.NavigateTo<LabelView>();
                     break;
             }
         }
