@@ -2,6 +2,7 @@
 using MaterialDesignThemes.Wpf;
 using Reactive.Bindings;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Windows;
 using Template.WPF.Services;
 using Template.WPF.Views;
@@ -28,6 +29,7 @@ namespace Template.WPF.ViewModels
         public ReactiveCommand ContentRendered { get; }
         public ReactiveCommand Closed { get; }
         public ReactiveCommand SidebarTextMouseUp { get; }
+        private readonly List<string> args = new(Environment.GetCommandLineArgs());
 
         public MainWindowViewModel(TransitionService navigation, MessageService messageService)
         {
@@ -51,8 +53,22 @@ namespace Template.WPF.ViewModels
             Closed = new ReactiveCommand().WithSubscribe(OnClosed);
             SidebarTextMouseUp = new ReactiveCommand().WithSubscribe(OnSidebarTextMouseUp);
 
-            // 初期画面を設定
-            _navigation.NavigateTo<HomeView>();
+            if (args.Any(a=>a=="License")) //TODO:修正
+            { 
+                _navigation.NavigateTo<LicenseView>(); 
+            }
+            else if (args.Any(a => a == "PartsSearch")) 
+            {
+                _navigation.NavigateTo<HomeView>();
+            }
+            else if (args.Any(a => a == "PartsLabelPrint"))
+            {
+                _navigation.NavigateTo<LabelView>();
+            }
+            else
+            {
+                _navigation.NavigateTo<HomeView>();
+            }
         }
 
         private void OnLoaded()

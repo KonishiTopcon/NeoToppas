@@ -42,11 +42,11 @@
             </Grid.ColumnDefinitions>
             <materialDesign:Snackbar Panel.ZIndex="1"
                                      Background="{StaticResource MaterialDesignSnackbarBackground}"
-                                     MessageQueue="{Binding SnackbarMessages.Value}" />
+                                     MessageQueue="{Binding SnackbarMessages.Value}" Grid.Column="1" />
                 <smtx:XamlDisplay Grid.Column="0" BorderBrush="Gray" BorderThickness="1"
                        VerticalContentAlignment="Top"
                        UniqueKey="trees_1">
-                <TreeView  SelectedItemChanged="TreeView_SelectedItemChanged">
+                <TreeView Name="TreeView1" SelectedItemChanged="TreeView_SelectedItemChanged">
                     <TreeViewItem IsExpanded="True">
                         <TreeViewItem.Header>
                             <StackPanel Orientation="Horizontal">
@@ -60,6 +60,11 @@
                             </StackPanel>
                         </TreeViewItem.Header>
                         <TreeViewItem Name="PartsSearch">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsSearch" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
                             <TreeViewItem.Header >
                                 <StackPanel Orientation="Horizontal" >
                                     <Viewbox Width="16" Height="16">
@@ -73,6 +78,11 @@ Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type
                             </TreeViewItem.Header>
                         </TreeViewItem>
                         <TreeViewItem Name="License">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_License" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
                             <TreeViewItem.Header >
                                 <StackPanel Orientation="Horizontal" >
                                     <Viewbox Width="16" Height="16">
@@ -101,6 +111,11 @@ Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type
                             </StackPanel>
                         </TreeViewItem.Header>
                         <TreeViewItem Name="PartsLabelPrint">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
                             <TreeViewItem.Header >
                                 <StackPanel Orientation="Horizontal" >
                                     <Viewbox Width="16" Height="16">

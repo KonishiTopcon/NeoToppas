@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows;
 using Template.WPF.ViewModels;
+using System.Diagnostics;
 
 namespace Template.WPF.Views
 {
@@ -29,5 +30,24 @@ namespace Template.WPF.Views
                 _viewModel.TreeSelectedChange(selectedname);
             }
         }
+        private void OpenNewWindow_PartsSearch(object sender, RoutedEventArgs e)
+        {
+            String fullname = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(fullname, "PartsSearch");
+        }
+
+        private void OpenNewWindow_License(object sender, RoutedEventArgs e)
+        { 
+            String fullname = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(fullname,"License");
+        }
+
+        private void OpenNewWindow_PartsLabelPrint(object sender, RoutedEventArgs e)
+        {
+            String fullname = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(fullname, "PartsLabelPrint");
+        }
+
+
     }
 }
