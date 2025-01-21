@@ -51,7 +51,8 @@ namespace Template.WPF.ViewModels
 
                 var doc = new bpac.DocumentClass();
                 // ファイルの読み込み (例: ラベルテンプレートファイル)
-                if (doc.Open(CommonConst.TEMPLATE_DIRECTORY + CommonConst.TEMPLATE_FILE))
+                var templateDirectory = NeoToppas.WPF.Properties.Settings.Default.LABEL_TEMPLATE_DIRECTORY;
+                if (doc.Open(templateDirectory + @"\"+ CommonConst.LABEL_TEMPLATE_FILE))
                 {
                     doc.GetObject("ShelfNo").Text = ShelfNo.Value;
                     doc.GetObject("ArrivalDate").Text = ArrivalDate.Value.ToString("yyyy/MM/dd");

@@ -17,7 +17,7 @@ namespace Template.WPF.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ReactivePropertySlim<string> Title { get; } = new ReactivePropertySlim<string>("NeoToppas");
+        public ReactivePropertySlim<string> Title { get; } = new ReactivePropertySlim<string>("NeoToppas"); //TODO title
         public ReactivePropertySlim<object> ActiveView { get; } = new ReactivePropertySlim<object>();
         public ReactivePropertySlim<bool> IsProgressDialogOpen { get; }
         public ReactivePropertySlim<string> ProgressDialogMessage { get; }

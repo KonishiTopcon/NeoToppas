@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NeoToppas.WPF.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AUTOUPDATE_ENABLE" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AUTOUPDATE_DATA_FOLDER" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\PCD01851\SharedFolder\NeoToppasLatestVersion</Value>
+    </Setting>
+    <Setting Name="LABEL_TEMPLATE_DIRECTORY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Users\l057277\OneDrive - Topcon\ドキュメント\各種案件\7.TOPPAS置き換え\3.ラベルプリンタ\ブラザーラベルプリンタ\テンプレート</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

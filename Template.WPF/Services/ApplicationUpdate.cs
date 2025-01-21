@@ -52,15 +52,18 @@ namespace NeoToppas.WPF.Services
                     // どちらのフォルダーにも存在して更新するかもしれないファイルは比較して相違があればコピー
                     foreach (var f in myFile.Intersect(newFile))
                     {
-                        // コピーする条件はFileVersionの相違または日付の相違
-                        if ((FileVersionInfo.GetVersionInfo($@"{path}\{f}").FileVersion != FileVersionInfo.GetVersionInfo($@"{Environment.CurrentDirectory}\{f}").FileVersion) ||
-                            (File.GetLastWriteTime($@"{path}\{f}") != File.GetLastWriteTime($@"{Environment.CurrentDirectory}\{f}")))
+                        if (f != CommonConst.CONFIGFILE_NAME)
                         {
-                            isUpdate = true;
-                            // 古いファイルは異常発生時のリカバリのため今は拡張子を変えて残しておく
-                            File.Move($@"{Environment.CurrentDirectory}\{f}", $@"{Environment.CurrentDirectory}\{f}.delete");
-                            // 新しいファイルをコピー
-                            File.Copy($@"{path}\{f}", $@"{Environment.CurrentDirectory}\{f}", true);
+                            // コピーする条件はFileVersionの相違または日付の相違
+                            if ((FileVersionInfo.GetVersionInfo($@"{path}\{f}").FileVersion != FileVersionInfo.GetVersionInfo($@"{Environment.CurrentDirectory}\{f}").FileVersion) ||
+                                (File.GetLastWriteTime($@"{path}\{f}") != File.GetLastWriteTime($@"{Environment.CurrentDirectory}\{f}")))
+                            {
+                                isUpdate = true;
+                                // 古いファイルは異常発生時のリカバリのため今は拡張子を変えて残しておく
+                                File.Move($@"{Environment.CurrentDirectory}\{f}", $@"{Environment.CurrentDirectory}\{f}.delete");
+                                // 新しいファイルをコピー
+                                File.Copy($@"{path}\{f}", $@"{Environment.CurrentDirectory}\{f}", true);
+                            }
                         }
                     }
                     // 自分の運用フォルダには存在しないが更新ファイルには存在する一覧(無条件コピー)

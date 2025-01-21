@@ -172,8 +172,8 @@ namespace Template.WPF.ViewModels
             });
 
 
-
-            if (CommonConst.ENABLE_AUTOUPDATE)
+            bool result ;
+            if (NeoToppas.WPF.Properties.Settings.Default.AUTOUPDATE_ENABLE) //CommonConst.AUTOUPDATE_ENABLE
             {
                 Update(); //プログラムの自動アップデート
             }
@@ -230,30 +230,35 @@ namespace Template.WPF.ViewModels
             {
                 ApplicationUpdate update = new();
 
-                if (!Directory.Exists(CommonConst.DATA_FOLDER))
+                if (!Directory.Exists(NeoToppas.WPF.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER)) //CommonConst.AUTOUPDATE_DATA_FOLDER
                 {
                     MessageBox.Show("自動アップデート失敗！\r\n最新アプリの格納フォルダにアクセスできません！！", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    if (!File.Exists(Directory.GetParent(CommonConst.DATA_FOLDER).ToString() + @"\NeoToppasLatestVersionTXT.txt"))
+                    if (!File.Exists((NeoToppas.WPF.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER).ToString() + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE)) //if (!File.Exists(Directory.GetParent(CommonConst.AUTOUPDATE_DATA_FOLDER).ToString() + @"\NeoToppasLatestVersionTXT.txt"))
                     {
                         MessageBox.Show("自動アップデート失敗！\r\n最新バージョン情報ファイルにアクセスできません！！", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        StreamReader sr = new StreamReader(Directory.GetParent(CommonConst.DATA_FOLDER).ToString() + @"\NeoToppasLatestVersionTXT.txt");
-
+                        //ファイルサーバ上のバージョン確認
+                        StreamReader sr = new StreamReader(NeoToppas.WPF.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE);
                         string str;
                         str = sr.ReadLine();
                         sr.Close();
+                        //現在の実行ファイルののバージョン確認
+                        StreamReader sr2 = new StreamReader(Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE);
+                        string str2;
+                        str2 = sr2.ReadLine();
+                        sr2.Close();
 
-                        if (str == CommonConst.APP_VERSION)
+                        if (str == str2)
                         {
                         }
                         else
                         {
-                            if (update.Update(CommonConst.DATA_FOLDER, null) == true)
+                            if (update.Update(NeoToppas.WPF.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER, null) == true)
                             {
                             }
                         }
