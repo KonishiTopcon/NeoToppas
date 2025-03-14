@@ -22,7 +22,7 @@ namespace Template.WPF.ViewModels
         public ReactivePropertySlim<bool> IsProgressDialogOpen { get; }
         public ReactivePropertySlim<string> ProgressDialogMessage { get; }
         public ReactivePropertySlim<string> SidebarText { get; } = new ReactivePropertySlim<string>("<");
-        public ReactivePropertySlim<double> SidebarWidth { get; } = new ReactivePropertySlim<double>(250);
+        public ReactivePropertySlim<double> SidebarWidth { get; } = new ReactivePropertySlim<double>(200);
         public ReactivePropertySlim<SnackbarMessageQueue> SnackbarMessages { get; }
 
         public ReactiveCommand Loaded { get; }
@@ -96,7 +96,7 @@ namespace Template.WPF.ViewModels
             else
             {
                 SidebarText.Value = "<";
-                SidebarWidth.Value = 250;
+                SidebarWidth.Value = 200;
             }
         }
 
