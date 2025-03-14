@@ -22,7 +22,7 @@ namespace Template.WPF.ViewModels
         public ReactivePropertySlim<bool> IsProgressDialogOpen { get; }
         public ReactivePropertySlim<string> ProgressDialogMessage { get; }
         public ReactivePropertySlim<string> SidebarText { get; } = new ReactivePropertySlim<string>("<");
-        public ReactivePropertySlim<double> SidebarWidth { get; } = new ReactivePropertySlim<double>(180);
+        public ReactivePropertySlim<double> SidebarWidth { get; } = new ReactivePropertySlim<double>(250);
         public ReactivePropertySlim<SnackbarMessageQueue> SnackbarMessages { get; }
 
         public ReactiveCommand Loaded { get; }
@@ -96,11 +96,11 @@ namespace Template.WPF.ViewModels
             else
             {
                 SidebarText.Value = "<";
-                SidebarWidth.Value = 180;
+                SidebarWidth.Value = 250;
             }
         }
 
-        public void TreeSelectedChange(string name)
+        public void TreeSelectedChange(string name) //TODO:ページ追加対応
         {
             switch (name)
             {
@@ -108,7 +108,15 @@ namespace Template.WPF.ViewModels
                     if (ActiveView.Value is not HomeView)
                         _navigation.NavigateTo<HomeView>();
                     break;
-                case "License":
+                case "PartsQuantityChk_Prototypee":
+                    if (ActiveView.Value is not LicenseView)
+                        _navigation.NavigateTo<LicenseView>();
+                    break;
+                case "PartsQuantityChk_MassPro":
+                    if (ActiveView.Value is not HomeView)
+                        _navigation.NavigateTo<HomeView>();
+                    break;
+                case "PartsChangeCtrl":
                     if (ActiveView.Value is not LicenseView)
                         _navigation.NavigateTo<LicenseView>();
                     break;
@@ -116,6 +124,15 @@ namespace Template.WPF.ViewModels
                     if (ActiveView.Value is not LabelView)
                         _navigation.NavigateTo<LabelView>();
                     break;
+                case "BoardSheetLabelPrint":
+                    if (ActiveView.Value is not HomeView)
+                        _navigation.NavigateTo<HomeView>();
+                    break;
+                case "BoardPieceLabelPrint":
+                    if (ActiveView.Value is not LicenseView)
+                        _navigation.NavigateTo<LicenseView>();
+                    break;
+
             }
         }
     }
