@@ -19,6 +19,9 @@ namespace Template.WPF.ViewModels
 
         public ReactivePropertySlim<string> Title { get; } = new ReactivePropertySlim<string>("NeoToppas"); //TODO title
         public ReactivePropertySlim<object> ActiveView { get; } = new ReactivePropertySlim<object>();
+        public ReactivePropertySlim<int> TreeSize { get; } = new ReactivePropertySlim<int>();
+        public ReactivePropertySlim<int> TreeFont1 { get; } = new ReactivePropertySlim<int>();
+        public ReactivePropertySlim<int> TreeFont2 { get; } = new ReactivePropertySlim<int>();
         public ReactivePropertySlim<bool> IsProgressDialogOpen { get; }
         public ReactivePropertySlim<string> ProgressDialogMessage { get; }
         public ReactivePropertySlim<string> SidebarText { get; } = new ReactivePropertySlim<string>("<");
@@ -38,6 +41,9 @@ namespace Template.WPF.ViewModels
             _navigation.Initialize(view =>
             {
                 ActiveView.Value = view;
+                TreeSize.Value = 15;
+                TreeFont1.Value = 20;
+                TreeFont2.Value = 15;   
             });
 
             // MessageServiceの初期化
@@ -96,7 +102,7 @@ namespace Template.WPF.ViewModels
             else
             {
                 SidebarText.Value = "<";
-                SidebarWidth.Value = 200;
+                SidebarWidth.Value = 300;
             }
         }
 
