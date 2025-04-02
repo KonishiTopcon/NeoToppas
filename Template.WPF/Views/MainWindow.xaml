@@ -12,6 +12,8 @@
                    Title="{Binding Title.Value}"
                    Width="1200"
                    Height="600"
+                   MinWidth="900"
+                   MinHeight="400"
                    dialogs:DialogParticipation.Register="{Binding}"
                    WindowStartupLocation="CenterScreen"
                    mc:Ignorable="d">
@@ -48,163 +50,222 @@
                        UniqueKey="trees_1">
                 <TreeView Name="TreeView1" SelectedItemChanged="TreeView_SelectedItemChanged" 
                           ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"  Width="{Binding SidebarWidth.Value}">
- 
 
-                        <TreeViewItem IsExpanded="True">
-                            <TreeViewItem.Header>
+
+                    <TreeViewItem IsExpanded="True">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}" VerticalAlignment="Top">
+                                    <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
+                                        <Path Data="M17.45,15.18L22,7.31V19L22,21H2V3H4V15.54L9.5,6L16,9.78L20.24,2.45L21.97,3.45L16.74,12.5L10.23,8.75L4.31,19H6.57L10.96,11.44L17.45,15.18Z"
+                          Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                    </Canvas>
+                                </Viewbox>
+                                <TextBlock Text="1.ダッシュボード" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="{Binding TreeFont1.Value}" />
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                        <TreeViewItem Name="Dashboard">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_Dashboard" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                            <TreeViewItem.Header >
+                                <TextBlock Text="①ダッシュボード" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem Name="Settings">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                            <TreeViewItem.Header >
+                                <TextBlock Text="②各種設定" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                    </TreeViewItem>
+
+                    <TreeViewItem IsExpanded="True">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}" VerticalAlignment="Top">
+                                    <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
+                                        <Path Data="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"
+                                              Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                    </Canvas>
+                                </Viewbox>
+                                <TextBlock Text="2.品質管理" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="{Binding TreeFont1.Value}" />
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                        <TreeViewItem Name="ExternalInspection">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                            <TreeViewItem.Header >
+                                <TextBlock Text="①外観検査" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem Name="FunctionalInspection">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                            <TreeViewItem.Header >
+                                <TextBlock Text="②機能検査" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                    </TreeViewItem>
+                    
+
+                    <TreeViewItem IsExpanded="True">
+                        <TreeViewItem.Header>
                                 <StackPanel Orientation="Horizontal">
-                                <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
+                                <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}" VerticalAlignment="Top">
                                     <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
                                             <Path Data="M4,6H6V18H4V6M7,6H8V18H7V6M9,6H12V18H9V6M13,6H14V18H13V6M16,6H18V18H16V6M19,6H20V18H19V6M2,4V8H0V4A2,2 0 0,1 2,2H6V4H2M22,2A2,2 0 0,1 24,4V8H22V4H18V2H22M2,16V20H6V22H2A2,2 0 0,1 0,20V16H2M22,20V16H24V20A2,2 0 0,1 22,22H18V20H22Z"
                                                       Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
                                         </Canvas>
                                     </Viewbox>
-                                <TextBlock Text="ラベル印刷" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="{Binding TreeFont1.Value}" />
+                                <TextBlock Text="3.ラベル印刷" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="{Binding TreeFont1.Value}" />
                                 </StackPanel>
                             </TreeViewItem.Header>
-                            <TreeViewItem Name="PartsLabelPrint">
+                            <TreeViewItem Name="GenpinLabelPrint">
                                 <TreeViewItem.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
                                     </ContextMenu>
                                 </TreeViewItem.ContextMenu>
                                 <TreeViewItem.Header >
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                    <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                        <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                                <Path Data="M2,6H4V18H2V6M5,6H6V18H5V6M7,6H10V18H7V6M11,6H12V18H11V6M14,6H16V18H14V6M17,6H20V18H17V6M21,6H22V18H21V6Z"
-        Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
-                                            </Canvas>
-                                        </Viewbox>
-                                    <TextBlock Text="部品ラベル印刷" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
-                                    </StackPanel>
+                                    <TextBlock Text="①現品ラベル" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
                                 </TreeViewItem.Header>
                             </TreeViewItem>
-                            <TreeViewItem Name="BoardSheetLabelPrint">
+                            <TreeViewItem Name="KibanLabelPrint">
                                 <TreeViewItem.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
                                     </ContextMenu>
                                 </TreeViewItem.ContextMenu>
                                 <TreeViewItem.Header >
-                                    <StackPanel Orientation="Horizontal" >
-                                    <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                        <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                                <Path Data="M2,6H4V18H2V6M5,6H6V18H5V6M7,6H10V18H7V6M11,6H12V18H11V6M14,6H16V18H14V6M17,6H20V18H17V6M21,6H22V18H21V6Z"
-        Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
-                                            </Canvas>
-                                        </Viewbox>
-                                    <TextBlock Text="基板シートラベル印刷" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
-                                    </StackPanel>
+                                    <TextBlock Text="②基板ラベル印刷" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
                                 </TreeViewItem.Header>
                             </TreeViewItem>
-                            <TreeViewItem Name="BoardPieceLabelPrint">
+                            <TreeViewItem Name="EtcLabelPrint">
                                 <TreeViewItem.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
                                     </ContextMenu>
                                 </TreeViewItem.ContextMenu>
                                 <TreeViewItem.Header >
-                                    <StackPanel Orientation="Horizontal" >
-                                    <Viewbox Width="{Binding TreeSize.Value}"  Height="{Binding TreeSize.Value}">
-                                        <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                                <Path Data="M2,6H4V18H2V6M5,6H6V18H5V6M7,6H10V18H7V6M11,6H12V18H11V6M14,6H16V18H14V6M17,6H20V18H17V6M21,6H22V18H21V6Z"
-        Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
-                                            </Canvas>
-                                        </Viewbox>
-                                    <TextBlock  Text="基板ピースラベル印刷" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
-                                    </StackPanel>
+                                    <TextBlock  Text="③その他ラベル" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
                                 </TreeViewItem.Header>
                             </TreeViewItem>
-                        </TreeViewItem>
+                    </TreeViewItem>
+
 
                     <TreeViewItem IsExpanded="True">
                         <TreeViewItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
+                                <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}" VerticalAlignment="Top">
                                     <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                        <Path Data="M6,4H18V5H21V7H18V9H21V11H18V13H21V15H18V17H21V19H18V20H6V19H3V17H6V15H3V13H6V11H3V9H6V7H3V5H6V4M11,15V18H12V15H11M13,15V18H14V15H13M15,15V18H16V15H15Z"
-                                                     Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                        <Path Data="M18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5M19.5,9.5L21.46,12H17V9.5M6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5M20,8H17V4H3C1.89,4 1,4.89 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8Z"   Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
                                     </Canvas>
                                 </Viewbox>
-                                <TextBlock Text="部品管理" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="{Binding TreeFont1.Value}" />
+                                <TextBlock Text="4.出荷計画" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="{Binding TreeFont1.Value}" />
                             </StackPanel>
                         </TreeViewItem.Header>
-                        <TreeViewItem Name="PartsSearch">
+                        <TreeViewItem Name="ShippingPlan">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsSearch" />
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
                                 </ContextMenu>
                             </TreeViewItem.ContextMenu>
                             <TreeViewItem.Header >
-                                <StackPanel Orientation="Horizontal" >
-                                    <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                        <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                            <Path Data="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
-       Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
-                                        </Canvas>
-                                    </Viewbox>
-                                    <TextBlock   Text="部品の検索" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
-                                </StackPanel>
-                            </TreeViewItem.Header>
-                        </TreeViewItem>
-                        <TreeViewItem Name="PartsQuantityChk_Prototype">
-                            <TreeViewItem.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_License" />
-                                </ContextMenu>
-                            </TreeViewItem.ContextMenu>
-                            <TreeViewItem.Header >
-                                <StackPanel Orientation="Horizontal" >
-                                    <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                        <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                            <Path Data="M11.19,2.25C10.93,2.25 10.67,2.31 10.42,2.4L3.06,5.45C2.04,5.87 1.55,7.04 1.97,8.05L6.93,20C7.24,20.77 7.97,21.23 8.74,21.25C9,21.25 9.27,21.22 9.53,21.1L16.9,18.05C17.65,17.74 18.11,17 18.13,16.25C18.14,16 18.09,15.71 18,15.45L13,3.5C12.71,2.73 11.97,2.26 11.19,2.25M14.67,2.25L18.12,10.6V4.25A2,2 0 0,0 16.12,2.25M20.13,3.79V12.82L22.56,6.96C22.97,5.94 22.5,4.78 21.47,4.36M11.19,4.22L16.17,16.24L8.78,19.3L3.8,7.29"
-       Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
-                                        </Canvas>
-                                    </Viewbox>
-                                    <TextBlock  Text="（試作）部品確認" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
-                                </StackPanel>
-                            </TreeViewItem.Header>
-                        </TreeViewItem>
-                        <TreeViewItem Name="PartsQuantityChk_MassPro">
-                            <TreeViewItem.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_License" />
-                                </ContextMenu>
-                            </TreeViewItem.ContextMenu>
-                            <TreeViewItem.Header >
-                                <StackPanel Orientation="Horizontal" >
-                                    <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                        <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                            <Path Data="M11.19,2.25C10.93,2.25 10.67,2.31 10.42,2.4L3.06,5.45C2.04,5.87 1.55,7.04 1.97,8.05L6.93,20C7.24,20.77 7.97,21.23 8.74,21.25C9,21.25 9.27,21.22 9.53,21.1L16.9,18.05C17.65,17.74 18.11,17 18.13,16.25C18.14,16 18.09,15.71 18,15.45L13,3.5C12.71,2.73 11.97,2.26 11.19,2.25M14.67,2.25L18.12,10.6V4.25A2,2 0 0,0 16.12,2.25M20.13,3.79V12.82L22.56,6.96C22.97,5.94 22.5,4.78 21.47,4.36M11.19,4.22L16.17,16.24L8.78,19.3L3.8,7.29"
-       Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
-                                        </Canvas>
-                                    </Viewbox>
-                                    <TextBlock  Text="（量産）部品確認" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
-                                </StackPanel>
-                            </TreeViewItem.Header>
-                        </TreeViewItem>
-                        <TreeViewItem Name="PartsChangeCtrl">
-                            <TreeViewItem.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_License" />
-                                </ContextMenu>
-                            </TreeViewItem.ContextMenu>
-                            <TreeViewItem.Header >
-                                <StackPanel Orientation="Horizontal" >
-                                    <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                        <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
-                                            <Path Data="M11.19,2.25C10.93,2.25 10.67,2.31 10.42,2.4L3.06,5.45C2.04,5.87 1.55,7.04 1.97,8.05L6.93,20C7.24,20.77 7.97,21.23 8.74,21.25C9,21.25 9.27,21.22 9.53,21.1L16.9,18.05C17.65,17.74 18.11,17 18.13,16.25C18.14,16 18.09,15.71 18,15.45L13,3.5C12.71,2.73 11.97,2.26 11.19,2.25M14.67,2.25L18.12,10.6V4.25A2,2 0 0,0 16.12,2.25M20.13,3.79V12.82L22.56,6.96C22.97,5.94 22.5,4.78 21.47,4.36M11.19,4.22L16.17,16.24L8.78,19.3L3.8,7.29"
-       Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
-                                        </Canvas>
-                                    </Viewbox>
-                                    <TextBlock Text="部品変更管理" VerticalAlignment="Center" Margin="8,0,0,0"    FontSize="{Binding TreeFont2.Value}"/>
-                                </StackPanel>
+                                <TextBlock Text="①出荷計画" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
                             </TreeViewItem.Header>
                         </TreeViewItem>
                     </TreeViewItem>
 
+                    <TreeViewItem IsExpanded="True">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}" VerticalAlignment="Top">
+                                    <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
+                                        <Path Data="M16,9H19L14,16M10,9H14L12,17M5,9H8L10,16M15,4H17L19,7H16M11,4H13L14,7H10M7,4H9L8,7H5M6,2L2,8L12,22L22,8L18,2H6Z"
+                          Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                    </Canvas>
+                                </Viewbox>
+                                <TextBlock Text="5.資産管理" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="{Binding TreeFont1.Value}" />
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                        <TreeViewItem Name="TanafudaPrint">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                            <TreeViewItem.Header >
+                                <TextBlock Text="①棚札印刷" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem Name="TanabanPrint">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                            <TreeViewItem.Header >
+                                <TextBlock Text="②棚番ラベル印刷" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem Name="Inventory">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                            <TreeViewItem.Header >
+                                <TextBlock Text="③棚卸関係" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                    </TreeViewItem>
 
+                    <TreeViewItem IsExpanded="True">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}" VerticalAlignment="Top">
+                                    <Canvas Width="{Binding TreeSize.Value}" Height="{Binding TreeSize.Value}">
+                                        <Path Data="M19,18H6A4,4 0 0,1 2,14A4,4 0 0,1 6,10H6.71C7.37,7.69 9.5,6 12,6A5.5,5.5 0 0,1 17.5,11.5V12H19A3,3 0 0,1 22,15A3,3 0 0,1 19,18M19.35,10.03C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.03C2.34,8.36 0,10.9 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.03Z"
+                                              Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                    </Canvas>
+                                </Viewbox>
+                                <TextBlock Text="6.SAP" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="{Binding TreeFont1.Value}" />
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                        <TreeViewItem Name="InventoryMovement">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                            <TreeViewItem.Header >
+                                <TextBlock Text="①在庫移動" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem Name="BomConverter">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                            <TreeViewItem.Header >
+                                <TextBlock Text="②Excel構成表変換" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                    </TreeViewItem>
 
 
                     </TreeView>

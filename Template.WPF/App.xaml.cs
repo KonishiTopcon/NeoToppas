@@ -123,6 +123,9 @@ namespace Template.WPF
             services.AddTransient<SettingViewModel>();
             services.AddTransient<LabelView>();
             services.AddTransient<LabelViewModel>();
+            services.AddTransient<DashboardView>();
+            services.AddTransient<DashboardViewModel>();
+            //TODO:画面追加対応
         }
     }
 }

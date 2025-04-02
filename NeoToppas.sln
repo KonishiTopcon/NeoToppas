@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoToppas.WPF", "Template.WPF\NeoToppas.WPF.csproj", "{884A8330-06A1-4F29-BF42-B15CF8146C35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toppas4", "Template.WPF\Toppas4.csproj", "{884A8330-06A1-4F29-BF42-B15CF8146C35}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoToppas.Domain", "Template.Domain\NeoToppas.Domain.csproj", "{BFF6ADD7-E1AE-4CEC-AE3D-3E122BB22BE9}"
 EndProject

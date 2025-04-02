@@ -48,6 +48,15 @@ namespace Template.WPF.Views
             Process.Start(fullname, "PartsLabelPrint");
         }
 
+        private void OpenNewWindow_Dashboard(object sender, RoutedEventArgs e)
+        {
+            String fullname = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(fullname, "Dashboard");
+        }
+
+
+        //TODO:画面追加対応
+
 
     }
 }

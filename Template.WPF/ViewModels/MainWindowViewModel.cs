@@ -17,7 +17,7 @@ namespace Template.WPF.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ReactivePropertySlim<string> Title { get; } = new ReactivePropertySlim<string>("NeoToppas"); //TODO title
+        public ReactivePropertySlim<string> Title { get; } = new ReactivePropertySlim<string>("Toppas4"); //TODO title
         public ReactivePropertySlim<object> ActiveView { get; } = new ReactivePropertySlim<object>();
         public ReactivePropertySlim<int> TreeSize { get; } = new ReactivePropertySlim<int>();
         public ReactivePropertySlim<int> TreeFont1 { get; } = new ReactivePropertySlim<int>();
@@ -25,7 +25,7 @@ namespace Template.WPF.ViewModels
         public ReactivePropertySlim<bool> IsProgressDialogOpen { get; }
         public ReactivePropertySlim<string> ProgressDialogMessage { get; }
         public ReactivePropertySlim<string> SidebarText { get; } = new ReactivePropertySlim<string>("<");
-        public ReactivePropertySlim<double> SidebarWidth { get; } = new ReactivePropertySlim<double>(200);
+        public ReactivePropertySlim<double> SidebarWidth { get; } = new ReactivePropertySlim<double>(230);
         public ReactivePropertySlim<SnackbarMessageQueue> SnackbarMessages { get; }
 
         public ReactiveCommand Loaded { get; }
@@ -59,7 +59,7 @@ namespace Template.WPF.ViewModels
             Closed = new ReactiveCommand().WithSubscribe(OnClosed);
             SidebarTextMouseUp = new ReactiveCommand().WithSubscribe(OnSidebarTextMouseUp);
 
-            if (args.Any(a=>a=="License")) //TODO:修正
+            if (args.Any(a=>a=="License")) //TODO:画面追加対応
             { 
                 _navigation.NavigateTo<LicenseView>(); 
             }
@@ -70,6 +70,10 @@ namespace Template.WPF.ViewModels
             else if (args.Any(a => a == "PartsLabelPrint"))
             {
                 _navigation.NavigateTo<LabelView>();
+            }
+            else if (args.Any(a => a == "Dashboard"))
+            {
+                _navigation.NavigateTo<DashboardView>();
             }
             else
             {
@@ -102,7 +106,7 @@ namespace Template.WPF.ViewModels
             else
             {
                 SidebarText.Value = "<";
-                SidebarWidth.Value = 300;
+                SidebarWidth.Value = 230;
             }
         }
 
@@ -137,6 +141,14 @@ namespace Template.WPF.ViewModels
                 case "BoardPieceLabelPrint":
                     if (ActiveView.Value is not LicenseView)
                         _navigation.NavigateTo<LicenseView>();
+                    break;
+                //case "LabelGenpinPrint":
+                //    if (ActiveView.Value is not LabelGenpinView)
+                //        _navigation.NavigateTo<LabelGenpinView>();
+                //    break;
+                case "Dashboard":
+                    if (ActiveView.Value is not DashboardView)
+                        _navigation.NavigateTo<DashboardView>();
                     break;
 
             }

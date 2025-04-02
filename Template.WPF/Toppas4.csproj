@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Image\dash.png" />
     <None Remove="Image\Toppas4.ico" />
   </ItemGroup>
 
@@ -27,10 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Image\Toppas4.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Resource Include="Image\dash.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <EmbeddedResource Include="Image\Toppas4.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace NeoToppas.WPF.Services
+namespace Toppas4.Services
 {
     public class ApplicationUpdate
     {

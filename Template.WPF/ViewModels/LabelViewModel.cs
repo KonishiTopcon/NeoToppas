@@ -12,7 +12,7 @@ using Template.WPF.Views;
 using bpac;
 using System.Xml.Linq;
 using System.Windows;
-using NeoToppas.WPF.Services;
+using Toppas4.Services;
 
 namespace Template.WPF.ViewModels
 {
@@ -51,7 +51,7 @@ namespace Template.WPF.ViewModels
 
                 var doc = new bpac.DocumentClass();
                 // ファイルの読み込み (例: ラベルテンプレートファイル)
-                var templateDirectory = NeoToppas.WPF.Properties.Settings.Default.LABEL_TEMPLATE_DIRECTORY;
+                var templateDirectory = Toppas4.Properties.Settings.Default.LABEL_TEMPLATE_DIRECTORY;
                 if (doc.Open(templateDirectory + @"\"+ CommonConst.LABEL_TEMPLATE_FILE))
                 {
                     doc.GetObject("ShelfNo").Text = ShelfNo.Value;

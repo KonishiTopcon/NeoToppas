@@ -1,4 +1,4 @@
-﻿using NeoToppas.WPF.Services;
+﻿using Toppas4.Services;
 using Reactive.Bindings;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -173,7 +173,7 @@ namespace Template.WPF.ViewModels
 
 
             bool result ;
-            if (NeoToppas.WPF.Properties.Settings.Default.AUTOUPDATE_ENABLE) //CommonConst.AUTOUPDATE_ENABLE
+            if (Toppas4.Properties.Settings.Default.AUTOUPDATE_ENABLE) //CommonConst.AUTOUPDATE_ENABLE
             {
                 Update(); //プログラムの自動アップデート
             }
@@ -230,20 +230,20 @@ namespace Template.WPF.ViewModels
             {
                 ApplicationUpdate update = new();
 
-                if (!Directory.Exists(NeoToppas.WPF.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER)) //CommonConst.AUTOUPDATE_DATA_FOLDER
+                if (!Directory.Exists(Toppas4.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER)) //CommonConst.AUTOUPDATE_DATA_FOLDER
                 {
                     MessageBox.Show("自動アップデート失敗！\r\n最新アプリの格納フォルダにアクセスできません！！", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    if (!File.Exists((NeoToppas.WPF.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER).ToString() + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE)) //if (!File.Exists(Directory.GetParent(CommonConst.AUTOUPDATE_DATA_FOLDER).ToString() + @"\NeoToppasLatestVersionTXT.txt"))
+                    if (!File.Exists((Toppas4.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER).ToString() + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE)) //if (!File.Exists(Directory.GetParent(CommonConst.AUTOUPDATE_DATA_FOLDER).ToString() + @"\NeoToppasLatestVersionTXT.txt"))
                     {
                         MessageBox.Show("自動アップデート失敗！\r\n最新バージョン情報ファイルにアクセスできません！！", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
                         //ファイルサーバ上のバージョン確認
-                        StreamReader sr = new StreamReader(NeoToppas.WPF.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE);
+                        StreamReader sr = new StreamReader(Toppas4.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE);
                         string str;
                         str = sr.ReadLine();
                         sr.Close();
@@ -258,7 +258,7 @@ namespace Template.WPF.ViewModels
                         }
                         else
                         {
-                            if (update.Update(NeoToppas.WPF.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER, null) == true)
+                            if (update.Update(Toppas4.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER, null) == true)
                             {
                             }
                         }
