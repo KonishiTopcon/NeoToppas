@@ -133,27 +133,27 @@
                                 <TextBlock Text="3.ラベル印刷" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="{Binding TreeFont1.Value}" />
                                 </StackPanel>
                             </TreeViewItem.Header>
-                            <TreeViewItem Name="GenpinLabelPrint">
+                            <TreeViewItem Name="GenpinLabel">
                                 <TreeViewItem.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_GenpinLabel" />
                                     </ContextMenu>
                                 </TreeViewItem.ContextMenu>
                                 <TreeViewItem.Header >
                                     <TextBlock Text="①現品ラベル" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
                                 </TreeViewItem.Header>
                             </TreeViewItem>
-                            <TreeViewItem Name="KibanLabelPrint">
+                            <TreeViewItem Name="KibanLabel">
                                 <TreeViewItem.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
                                     </ContextMenu>
                                 </TreeViewItem.ContextMenu>
                                 <TreeViewItem.Header >
-                                    <TextBlock Text="②基板ラベル印刷" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                                    <TextBlock Text="②基板ラベル" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
                                 </TreeViewItem.Header>
                             </TreeViewItem>
-                            <TreeViewItem Name="EtcLabelPrint">
+                            <TreeViewItem Name="EtcLabel">
                                 <TreeViewItem.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />

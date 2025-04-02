@@ -53,7 +53,11 @@ namespace Template.WPF.Views
             String fullname = Process.GetCurrentProcess().MainModule.FileName;
             Process.Start(fullname, "Dashboard");
         }
-
+        private void OpenNewWindow_GenpinLabel(object sender, RoutedEventArgs e)
+        {
+            String fullname = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(fullname, "GenpinLabel");
+        }
 
         //TODO:画面追加対応
 

@@ -75,6 +75,10 @@ namespace Template.WPF.ViewModels
             {
                 _navigation.NavigateTo<DashboardView>();
             }
+            else if (args.Any(a => a == "GenpinLabel"))
+            {
+                _navigation.NavigateTo<DashboardView>();
+            }
             else
             {
                 _navigation.NavigateTo<HomeView>();
@@ -150,6 +154,14 @@ namespace Template.WPF.ViewModels
                     if (ActiveView.Value is not DashboardView)
                         _navigation.NavigateTo<DashboardView>();
                     break;
+                case "GenpinLabel":
+                    if (ActiveView.Value is not GenpinLabelView)
+                        _navigation.NavigateTo<GenpinLabelView>();
+                    break;
+
+
+
+
 
             }
         }
