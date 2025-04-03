@@ -17,19 +17,14 @@ using Template.WPF.ViewModels;
 namespace Template.WPF.Views
 {
     /// <summary>
-    /// HomeView.xaml の相互作用ロジック
+    /// LicenseView.xaml の相互作用ロジック
     /// </summary>
-    public partial class LabelView : UserControl
+    public partial class TanabanPrintView : UserControl
     {
-        public LabelView(LabelViewModel viewModel)
+        public TanabanPrintView(TanabanPrintViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

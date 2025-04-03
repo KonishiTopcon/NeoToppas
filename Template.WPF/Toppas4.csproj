@@ -11,8 +11,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="新しいフォルダー\**" />
+    <EmbeddedResource Remove="新しいフォルダー\**" />
+    <None Remove="新しいフォルダー\**" />
+    <Page Remove="新しいフォルダー\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Image\dash.png" />
     <None Remove="Image\Toppas4.ico" />
+    <None Remove="Templates\Genpintemplate1.lbx" />
+    <None Remove="Templates\Tanabantemplate.lbx" />
+    <None Remove="Templates\Tanabantemplate_b.lbx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +41,15 @@
     <Resource Include="Image\dash.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Templates\Genpintemplate1.lbx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Tanabantemplate.lbx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Tanabantemplate_b.lbx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Image\Toppas4.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

@@ -58,7 +58,12 @@ namespace Template.WPF.Views
             String fullname = Process.GetCurrentProcess().MainModule.FileName;
             Process.Start(fullname, "GenpinLabel");
         }
-
+        private void OpenNewWindow_TanabanPrint(object sender, RoutedEventArgs e)
+        {
+            String fullname = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(fullname, "TanabanPrint");
+        }
+        
         //TODO:画面追加対応
 
 

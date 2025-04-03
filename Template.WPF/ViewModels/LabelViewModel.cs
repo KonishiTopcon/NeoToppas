@@ -52,7 +52,7 @@ namespace Template.WPF.ViewModels
                 var doc = new bpac.DocumentClass();
                 // ファイルの読み込み (例: ラベルテンプレートファイル)
                 var templateDirectory = Toppas4.Properties.Settings.Default.LABEL_TEMPLATE_DIRECTORY;
-                if (doc.Open(templateDirectory + @"\"+ CommonConst.LABEL_TEMPLATE_FILE))
+                if (doc.Open(templateDirectory + @"\"+ CommonConst.GENPINLABEL_TEMPLATE_FILE))
                 {
                     doc.GetObject("ShelfNo").Text = ShelfNo.Value;
                     doc.GetObject("ArrivalDate").Text = ArrivalDate.Value.ToString("yyyy/MM/dd");

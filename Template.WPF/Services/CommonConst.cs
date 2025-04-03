@@ -14,7 +14,7 @@ namespace Toppas4.Services
         public static string CONFIGFILE_NAME = "Toppas4.dll.config";
 
         //ラベル印刷
-        public static string LABEL_TEMPLATE_FILE = "PCBtemplate1.LBX";
+        public static string GENPINLABEL_TEMPLATE_FILE = "Genpintemplate1.LBX";
 
     }
 }

@@ -79,6 +79,11 @@ namespace Template.WPF.ViewModels
             {
                 _navigation.NavigateTo<DashboardView>();
             }
+            else if (args.Any(a => a == "TanabanPrint"))
+            {
+                _navigation.NavigateTo<TanabanPrintView>();
+            }
+            
             else
             {
                 _navigation.NavigateTo<HomeView>();
@@ -158,8 +163,12 @@ namespace Template.WPF.ViewModels
                     if (ActiveView.Value is not GenpinLabelView)
                         _navigation.NavigateTo<GenpinLabelView>();
                     break;
+                case "TanabanPrint":
+                    if (ActiveView.Value is not TanabanPrintView)
+                        _navigation.NavigateTo<TanabanPrintView>();
+                    break;
 
-
+                    
 
 
 

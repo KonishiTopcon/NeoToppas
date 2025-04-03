@@ -48,7 +48,8 @@
                     Background="Transparent" BorderBrush="Transparent" FontSize="30" Margin="0,0,0,10" 
                     FontWeight="Normal" Foreground="Black" Command="{Binding DeleteSearchTextBtn}"/>
                 </Grid>
-                <Button Margin="0,0,0,0" Width="130" Height="40"  Content="検索" FontSize="25" VerticalAlignment="Center"/>
+                <Button Margin="0,0,0,0" Width="130" Height="40"  Content="検索" FontSize="25" VerticalAlignment="Center"
+                       Command="{Binding SearchBtn}" />
             </StackPanel>
         </Grid>
         <Grid Grid.Row="3" Background="DarkBlue" />
@@ -106,7 +107,7 @@ Height="40" Padding="5"  Margin="1" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="入庫日" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
  Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
-                <TextBlock Grid.Column="1" Text="{Binding ReceiptDate.Value}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                <TextBlock Grid.Column="1" Text="{Binding ReceiptDate.Value, StringFormat={}{0:yyyy/MM/dd}}"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
 Height="38" Padding="5"  Margin="1" />
                 <TextBlock Grid.Column="2" Text="棚番号" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
 Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
@@ -125,7 +126,12 @@ Height="38" Padding="5"  Margin="1" />
  Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
                 <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="2"/>
                 <TextBox Grid.Column="1"  FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" 
-Height="35"   Margin="10,0,1,1"  Width="100"  Text="{Binding NumberOfPartsReceived.Value}"/>
+Height="35"   Margin="10,0,1,1"  Width="100"  Text="{Binding NumberOfPartsReceived.Value}" ToolTip="注文番号検索の場合は値が自動で入ります。"/>
+                <TextBlock Grid.Column="2" Text="コスト" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
+Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
+                <TextBlock Grid.Column="3" Text="{Binding Cost.Value}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
+Height="38" Padding="5"  Margin="1" />
+
             </Grid>
 
             <Grid Grid.Row="4">
@@ -139,7 +145,7 @@ Height="35"   Margin="10,0,1,1"  Width="100"  Text="{Binding NumberOfPartsReceiv
  Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
                 <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="2"/>
                 <TextBox Grid.Column="1"  FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" 
-Height="35"   Margin="10,0,1,1"  Width="100" Text="{Binding PrintCnt.Value}" />
+Height="35"   Margin="10,0,1,1"  Width="100" Text="{Binding PrintCnt.Value}" ToolTip="入庫数のワークをいれる箱の数を入力します。" />
                 <TextBlock Grid.Column="2" Text="リール番号発番" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
 Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
                 <CheckBox Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"
@@ -161,16 +167,16 @@ Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
  Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
                 <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="2"/>
                 <TextBox Grid.Column="1"  FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" 
-Height="35"   Margin="10,0,1,1" Width="100" Text="{Binding SplitSize.Value}"/>
+Height="35"   Margin="10,0,1,1" Width="100" Text="{Binding SplitSize.Value}" ToolTip="一つの箱に入る最大のワーク数"/>
             </Grid>
         </Grid>
 
         <Grid Grid.Row="7" Margin="50,00,50,0">
             <StackPanel Orientation="Horizontal">
                 <Button Margin="0,0,0,0" Width="130" Height="40"  Content="印刷" FontSize="25" VerticalAlignment="Center"
-                        Foreground="AliceBlue"/>
+                        Foreground="AliceBlue"   Command="{Binding PrintBtn}"/>
                 <Button Margin="50,0,0,0" Width="130" Height="40"  Content="キャンセル" FontSize="25" VerticalAlignment="Center"
-                        Background="Black" BorderBrush="Black"/>
+                        Background="Black" BorderBrush="Black"  Command="{Binding CancelBtn}"/>
             </StackPanel>
         </Grid>
         
