@@ -21,10 +21,25 @@ namespace Template.WPF.Views
     /// </summary>
     public partial class TanabanPrintView : UserControl
     {
+        TanabanPrintViewModel viewModel1;
         public TanabanPrintView(TanabanPrintViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
+            viewModel1 = viewModel;
+        }
+
+        private void Hinmoku0_LostFocus(object sender, RoutedEventArgs e)
+        {
+            viewModel1.Hinmoku0_LostFocus();
+        }
+        private void Hinmoku1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            viewModel1.Hinmoku1_LostFocus();
+        }
+        private void Hinmoku2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            viewModel1.Hinmoku2_LostFocus();
         }
     }
 }

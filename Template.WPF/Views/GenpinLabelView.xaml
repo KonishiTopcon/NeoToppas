@@ -72,10 +72,10 @@
 
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="150" />
-                        <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="品目コード" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
  Height="38" Width="150" Padding="5" Margin="1" Background="LightGray"/>
@@ -86,7 +86,7 @@ Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
                 <TextBlock Grid.Column="3" Text="{Binding Rev.Value}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
 Height="38" Padding="5"  Margin="1" />
             </Grid>
-            
+
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
@@ -137,9 +137,9 @@ Height="38" Padding="5"  Margin="1" />
             <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="150" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="プリント枚数" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
  Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
@@ -148,7 +148,7 @@ Height="38" Padding="5"  Margin="1" />
 Height="35"   Margin="10,0,1,1"  Width="100" Text="{Binding PrintCnt.Value}" ToolTip="入庫数のワークをいれる箱の数を入力します。" />
                 <TextBlock Grid.Column="2" Text="リール番号発番" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
 Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
-                <CheckBox Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"
+                <CheckBox Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,11"
                           IsChecked="{Binding UpdateReelNum.Value}">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
@@ -179,7 +179,7 @@ Height="35"   Margin="10,0,1,1" Width="100" Text="{Binding SplitSize.Value}" Too
                         Background="Black" BorderBrush="Black"  Command="{Binding CancelBtn}"/>
             </StackPanel>
         </Grid>
-        
+
 
 
     </Grid>
