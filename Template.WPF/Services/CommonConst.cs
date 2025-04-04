@@ -15,6 +15,8 @@ namespace Toppas4.Services
 
         //ラベル印刷
         public static string GENPINLABEL_TEMPLATE_FILE = "Genpintemplate1.LBX";
+        public static string TANABANLABEL_TEMPLATE_FILE = "Tanabantemplate.LBX";
+        public static string TANABANLABELB_TEMPLATE_FILE = "Tanabantemplate_b.LBX";
 
     }
 }

@@ -14,6 +14,7 @@ using bpac;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
 using Toppas4.Services;
+using NeoToppas.Infrastructure.BrotherPrinter;
 
 namespace Template.WPF.ViewModels
 {
@@ -102,9 +103,7 @@ namespace Template.WPF.ViewModels
                             doc.GetObject("ReelNo").Text = "";
                         }
                         // ラベルの印刷処理などを実行
-                        doc.StartPrint("", PrintOptionConstants.bpoDefault);
-                        doc.PrintOut(1, PrintOptionConstants.bpoDefault);
-                        doc.EndPrint();
+                        BrotherPrint.Print_Brother(doc);
                     }
                     doc.Close();
                 }
@@ -122,6 +121,14 @@ namespace Template.WPF.ViewModels
             });
 
         }
+
+        private static void Print_Brother(DocumentClass doc)
+        {
+            doc.StartPrint("", PrintOptionConstants.bpoDefault);
+            doc.PrintOut(1, PrintOptionConstants.bpoDefault);
+            doc.EndPrint();
+        }
+
         public void ResetForm()
         {
             SearchText.Value = "";

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using NeoToppas.Infrastructure.BrotherPrinter;
 using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
@@ -7,10 +8,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
+using System.Xaml;
 using Template.WPF.Services;
 using Template.WPF.UIEntities;
 using Template.WPF.Views;
+using Toppas4.Services;
 
 namespace Template.WPF.ViewModels
 {
@@ -33,6 +37,7 @@ namespace Template.WPF.ViewModels
         public ReactiveCommand DeleteHinmokuBtn1 { get; }
         public ReactiveCommand DeleteHinmokuBtn2 { get; }
         public ReactiveCommand CancelBtn { get; }
+        public ReactiveCommand PrintBtn { get; }
         public TanabanPrintViewModel(TransitionService contentNavigation)
         {
             BarcodeExist.Value = false;
@@ -72,7 +77,59 @@ namespace Template.WPF.ViewModels
                 ResetForm();
                 return;
             });
+            PrintBtn = new ReactiveCommand().WithSubscribe(async () =>
+            {
+                int MAX_TANABAN_CNT = 3;
+                var doc = new bpac.DocumentClass();
+                var templateDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates");
+                if (BarcodeExist.Value == true) //ボーコードなし
+                {
+                    if (!doc.Open(templateDirectory + @"\" + CommonConst.TANABANLABEL_TEMPLATE_FILE))
+                    {
+                        System.Windows.MessageBox.Show("ラベルテンプレートを開けませんでした。", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+                else //ボーコードあり
+                {
+                    if (!doc.Open(templateDirectory + @"\" + CommonConst.TANABANLABELB_TEMPLATE_FILE))
+                    {
+                        System.Windows.MessageBox.Show("ラベルテンプレートを開けませんでした。", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+                for (int pidx = 1; pidx <= MAX_TANABAN_CNT; pidx++)
+                {
+                    if (pidx == 1 && hinmokutext0.Value !="")
+                    {
+                        doc.GetObject("ShelfNo").Text = shelf0.Value;
+                        doc.GetObject("ItemCode").Text = hinmoku0.Value;
+                        doc.GetObject("ItemName").Text = hinmokutext0.Value;
+                        BrotherPrint.Print_Brother(doc);
+                    }
+                    else if (pidx == 2 && hinmokutext1.Value != "")
+                    {
+                        doc.GetObject("ShelfNo").Text = shelf1.Value;
+                        doc.GetObject("ItemCode").Text = hinmoku1.Value;
+                        doc.GetObject("ItemName").Text = hinmokutext1.Value;
+                        BrotherPrint.Print_Brother(doc);
+                    }
+                    else if (pidx == 3 && hinmokutext2.Value != "")
+                    {
+                        doc.GetObject("ShelfNo").Text = shelf2.Value;
+                        doc.GetObject("ItemCode").Text = hinmoku2.Value;
+                        doc.GetObject("ItemName").Text = hinmokutext2.Value;
+                        BrotherPrint.Print_Brother(doc);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                doc.Close();
 
+                return;
+            });
 
         }
 
