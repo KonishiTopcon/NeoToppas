@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:Template.WPF.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             d:DesignHeight="450"
+             d:DesignHeight="600"
              d:DesignWidth="800"
              mc:Ignorable="d">
     <Grid>
@@ -15,7 +15,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Text="棚札印刷" Grid.Row="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
         <Rectangle Grid.Row="1" Height="4" Width="500" HorizontalAlignment="Center">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -26,6 +25,102 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+
+        <Grid Grid.Row="2"  Margin="50,10,50,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBlock  Text="品目コード" Width="200"  Height="25" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock  Text="品目テキスト" Width="200"  Height="25" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock  Text="棚番号" Width="200"  Height="25" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            </StackPanel>
+            
+            
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <TextBox Text="{Binding hinmoku0.Value, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" 
+        Height="40" Width="190" BorderBrush="Black" BorderThickness="1" FontSize="20"
+         materialDesign:HintAssist.Hint="品目コードを入力"  materialDesign:HintAssist.Foreground="Gray"
+         VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0"
+                         LostFocus="Hinmoku0_LostFocus"
+                         />
+                <Button Content="×" Grid.Column="0" Width="50" Height="40" HorizontalAlignment="Right" VerticalAlignment="Center"
+Background="Transparent" BorderBrush="Transparent" FontSize="30" Margin="0,0,0,10" 
+FontWeight="Normal" Foreground="Black" Command="{Binding DeleteHinmokuBtn0}"/>
+                <TextBlock  Grid.Column="1"  Text="{Binding hinmokutext0.Value}" Width="200"  Height="35" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                <TextBlock  Grid.Column="2"   Text="{Binding shelf0.Value}"  Width="200"  Height="35" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <TextBox Text="{Binding hinmoku1.Value, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" 
+Height="40" Width="190" BorderBrush="Black" BorderThickness="1" FontSize="20"
+ materialDesign:HintAssist.Hint="品目コードを入力"  materialDesign:HintAssist.Foreground="Gray"
+ VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0"
+                 LostFocus="Hinmoku1_LostFocus"/>
+                <Button Content="×" Grid.Column="0" Width="50" Height="40" HorizontalAlignment="Right" VerticalAlignment="Center"
+Background="Transparent" BorderBrush="Transparent" FontSize="30" Margin="0,0,0,10" 
+FontWeight="Normal" Foreground="Black" Command="{Binding DeleteHinmokuBtn1}"/>
+                <TextBlock  Grid.Column="1"  Text="{Binding hinmokutext1.Value}" Width="200"  Height="35" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                <TextBlock  Grid.Column="2"   Text="{Binding shelf1.Value}" Width="200"  Height="35" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <TextBox Text="{Binding hinmoku2.Value, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" 
+Height="40" Width="190" BorderBrush="Black" BorderThickness="1" FontSize="20"
+ materialDesign:HintAssist.Hint="品目コードを入力"  materialDesign:HintAssist.Foreground="Gray"
+ VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0"
+                 LostFocus="Hinmoku2_LostFocus"/>
+                <Button Content="×" Grid.Column="0" Width="50" Height="40" HorizontalAlignment="Right" VerticalAlignment="Center"
+Background="Transparent" BorderBrush="Transparent" FontSize="30" Margin="0,0,0,10" 
+FontWeight="Normal" Foreground="Black" Command="{Binding DeleteHinmokuBtn2}"/>
+                <TextBlock  Grid.Column="1"  Text="{Binding hinmokutext2.Value}" Width="200"  Height="35" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                <TextBlock  Grid.Column="2"   Text="{Binding shelf2.Value}" Width="200"  Height="35" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+            </Grid>
+
+            <Grid Grid.Row="7" Margin="00,00,50,0">
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="0,0,0,0" Width="130" Height="40"  Content="印刷" FontSize="25" VerticalAlignment="Center"
+                        Foreground="AliceBlue"   Command="{Binding PrintBtn}"/>
+                    <Button Margin="50,0,0,0" Width="130" Height="40"  Content="キャンセル" FontSize="25" VerticalAlignment="Center"
+                        Background="Black" BorderBrush="Black"  Command="{Binding CancelBtn}"/>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+        
+        
+        
+        
+
 
     </Grid>
 </UserControl>
