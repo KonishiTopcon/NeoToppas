@@ -83,10 +83,14 @@ namespace Template.WPF.ViewModels
             {
                 _navigation.NavigateTo<TanabanPrintView>();
             }
+            else if (args.Any(a => a == "TanafudaPrint"))
+            {
+                _navigation.NavigateTo<TanafudaPrintView>();
+            }
             
             else
             {
-                _navigation.NavigateTo<HomeView>();
+                _navigation.NavigateTo<DashboardView>();
             }
         }
 
@@ -167,7 +171,10 @@ namespace Template.WPF.ViewModels
                     if (ActiveView.Value is not TanabanPrintView)
                         _navigation.NavigateTo<TanabanPrintView>();
                     break;
-
+                case "TanafudaPrint":
+                    if (ActiveView.Value is not TanafudaPrintView)
+                        _navigation.NavigateTo<TanafudaPrintView>();
+                    break;
                     
 
 

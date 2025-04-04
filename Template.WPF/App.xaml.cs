@@ -129,7 +129,9 @@ namespace Template.WPF
             services.AddTransient<GenpinLabelViewModel>();
             services.AddTransient<TanabanPrintView>();
             services.AddTransient<TanabanPrintViewModel>();
-
+            services.AddTransient<TanafudaPrintView>();
+            services.AddTransient<TanafudaPrintViewModel>();
+            
             //TODO:画面追加対応
         }
     }

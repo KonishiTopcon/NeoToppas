@@ -63,7 +63,13 @@ namespace Template.WPF.Views
             String fullname = Process.GetCurrentProcess().MainModule.FileName;
             Process.Start(fullname, "TanabanPrint");
         }
+        private void OpenNewWindow_TanafudaPrint(object sender, RoutedEventArgs e)
+        {
+            String fullname = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(fullname, "TanafudaPrint");
+        }
         
+
         //TODO:画面追加対応
 
 
