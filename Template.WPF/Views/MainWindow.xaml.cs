@@ -58,6 +58,11 @@ namespace Template.WPF.Views
             String fullname = Process.GetCurrentProcess().MainModule.FileName;
             Process.Start(fullname, "GenpinLabel");
         }
+        private void OpenNewWindow_KibanLabel(object sender, RoutedEventArgs e)
+        {
+            String fullname = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(fullname, "KibanLabel");
+        }
         private void OpenNewWindow_TanabanPrint(object sender, RoutedEventArgs e)
         {
             String fullname = Process.GetCurrentProcess().MainModule.FileName;

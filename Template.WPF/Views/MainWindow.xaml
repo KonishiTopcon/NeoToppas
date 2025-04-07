@@ -146,7 +146,7 @@
                             <TreeViewItem Name="KibanLabel">
                                 <TreeViewItem.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                        <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_KibanLabel" />
                                     </ContextMenu>
                                 </TreeViewItem.ContextMenu>
                                 <TreeViewItem.Header >
@@ -204,7 +204,7 @@
                         <TreeViewItem Name="TanafudaPrint">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_TanafudaPrint" />
                                 </ContextMenu>
                             </TreeViewItem.ContextMenu>
                             <TreeViewItem.Header >
@@ -214,7 +214,7 @@
                         <TreeViewItem Name="TanabanPrint">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_TanabanPrint" />
                                 </ContextMenu>
                             </TreeViewItem.ContextMenu>
                             <TreeViewItem.Header >

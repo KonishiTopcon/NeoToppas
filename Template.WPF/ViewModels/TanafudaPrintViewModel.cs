@@ -1,10 +1,13 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using ClosedXML.Excel;
+using Microsoft.Extensions.Hosting;
 using NeoToppas.Infrastructure.BrotherPrinter;
 using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +18,13 @@ using Template.WPF.Services;
 using Template.WPF.UIEntities;
 using Template.WPF.Views;
 using Toppas4.Services;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Template.WPF.ViewModels
 {
     public class TanafudaPrintViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        public ReactivePropertySlim<bool> BarcodeExist { get; } = new ReactivePropertySlim<bool>();
         public ReactivePropertySlim<string> hinmoku0 { get; } = new ReactivePropertySlim<string>();
         public ReactivePropertySlim<string> hinmoku1 { get; } = new ReactivePropertySlim<string>();
         public ReactivePropertySlim<string> hinmoku2 { get; } = new ReactivePropertySlim<string>();
@@ -37,10 +40,9 @@ namespace Template.WPF.ViewModels
         public ReactiveCommand DeleteHinmokuBtn1 { get; }
         public ReactiveCommand DeleteHinmokuBtn2 { get; }
         public ReactiveCommand CancelBtn { get; }
-        public ReactiveCommand PrintBtn { get; }
+        public ReactiveCommand PDFBtn { get; }
         public TanafudaPrintViewModel(TransitionService contentNavigation)
         {
-            BarcodeExist.Value = false;
             hinmoku0.Value = "T47001441A";
             hinmoku1.Value = "T47001441B";
             hinmoku2.Value = "T47001441C";
@@ -77,57 +79,72 @@ namespace Template.WPF.ViewModels
                 ResetForm();
                 return;
             });
-            PrintBtn = new ReactiveCommand().WithSubscribe(async () =>
+            PDFBtn = new ReactiveCommand().WithSubscribe(async () =>
             {
-                int MAX_TANABAN_CNT = 3;
-                var doc = new bpac.DocumentClass();
-                var templateDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates");
-                if (BarcodeExist.Value == true) //ボーコードなし
+                string templatePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates") +
+                 @"\" + CommonConst.TANAFUDA_TEMPLATE_FILE;
+                string outputExcelPath = ($"C\\Toppas4\\Temporary") + @"\" + "棚札印刷用.xlsx";
+                // ファイルが使用中かどうかを確認
+                try
                 {
-                    if (!doc.Open(templateDirectory + @"\" + CommonConst.TANABANLABEL_TEMPLATE_FILE))
-                    {
-                        System.Windows.MessageBox.Show("ラベルテンプレートを開けませんでした。", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                }
-                else //ボーコードあり
-                {
-                    if (!doc.Open(templateDirectory + @"\" + CommonConst.TANABANLABELB_TEMPLATE_FILE))
-                    {
-                        System.Windows.MessageBox.Show("ラベルテンプレートを開けませんでした。", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                }
-                for (int pidx = 1; pidx <= MAX_TANABAN_CNT; pidx++)
-                {
-                    if (pidx == 1 && hinmokutext0.Value !="")
-                    {
-                        doc.GetObject("ShelfNo").Text = shelf0.Value;
-                        doc.GetObject("ItemCode").Text = hinmoku0.Value;
-                        doc.GetObject("ItemName").Text = hinmokutext0.Value;
-                        BrotherPrint.Print_Brother(doc);
-                    }
-                    else if (pidx == 2 && hinmokutext1.Value != "")
-                    {
-                        doc.GetObject("ShelfNo").Text = shelf1.Value;
-                        doc.GetObject("ItemCode").Text = hinmoku1.Value;
-                        doc.GetObject("ItemName").Text = hinmokutext1.Value;
-                        BrotherPrint.Print_Brother(doc);
-                    }
-                    else if (pidx == 3 && hinmokutext2.Value != "")
-                    {
-                        doc.GetObject("ShelfNo").Text = shelf2.Value;
-                        doc.GetObject("ItemCode").Text = hinmoku2.Value;
-                        doc.GetObject("ItemName").Text = hinmokutext2.Value;
-                        BrotherPrint.Print_Brother(doc);
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                doc.Close();
 
+                    // 1. Excelを開いてデータを入力
+                    using (var workbookx = new XLWorkbook(templatePath))
+                    {
+                        workbookx.SaveAs(outputExcelPath);
+                    }
+
+                    using (var workbooky = new XLWorkbook(outputExcelPath))
+                    {
+                        var worksheetx = workbooky.Worksheet(1);
+
+                        for (int p = 0; p <= 2; p++)
+                        {
+                            var worksheetn = worksheetx.CopyTo(p.ToString());
+                            if (p == 0 && hinmokutext0.Value.Length >= 0)
+                            {
+                                worksheetn.Cell("B1").Value = shelf0.Value;
+                                worksheetn.Cell("A3").Value = hinmoku0.Value;
+                                worksheetn.Cell("C5").Value = hinmokutext0.Value;
+                            }
+                            if (p == 1 && hinmokutext1.Value.Length >= 0)
+                            {
+                                worksheetn.Cell("B1").Value = shelf1.Value;
+                                worksheetn.Cell("A3").Value = hinmoku1.Value;
+                                worksheetn.Cell("C5").Value = hinmokutext1.Value;
+                            }
+                            if (p == 2 && hinmokutext2.Value.Length >= 0)
+                            {
+                                worksheetn.Cell("B1").Value = shelf2.Value;
+                                worksheetn.Cell("A3").Value = hinmoku2.Value;
+                                worksheetn.Cell("C5").Value = hinmokutext2.Value;
+                            }
+                        }
+
+                        worksheetx.Delete();
+                        // 保存
+                        workbooky.Save();
+                        workbooky.Dispose();
+                    }
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("エクセルファイルの保存に失敗しました。" + Environment.NewLine +
+                        "棚札印刷用.xlsxが開かれている場合は閉じてリトライしてください。", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                try { 
+                    string excelAppPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Microsoft Office", "root", "Office16", "EXCEL.EXE");
+
+                    // Excelアプリケーションを起動し、ファイルパスを引数として渡す
+                    Process.Start(excelAppPath, outputExcelPath);
+                    System.Windows.MessageBox.Show("棚札印刷用のエクセルを開きます。" + Environment.NewLine +
+                        "印刷範囲を「ブック全体」として印刷してください。");
+                }
+               catch {
+                    System.Windows.MessageBox.Show("エクセルファイルを開けませんでした", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return; 
+                }
                 return;
             });
 

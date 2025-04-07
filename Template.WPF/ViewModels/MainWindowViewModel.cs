@@ -77,7 +77,7 @@ namespace Template.WPF.ViewModels
             }
             else if (args.Any(a => a == "GenpinLabel"))
             {
-                _navigation.NavigateTo<DashboardView>();
+                _navigation.NavigateTo<GenpinLabelView>();
             }
             else if (args.Any(a => a == "TanabanPrint"))
             {

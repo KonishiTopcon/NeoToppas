@@ -82,7 +82,7 @@ namespace Template.WPF.ViewModels
                 int MAX_TANABAN_CNT = 3;
                 var doc = new bpac.DocumentClass();
                 var templateDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates");
-                if (BarcodeExist.Value == true) //ボーコードなし
+                if (BarcodeExist.Value == true) //バーコードなし
                 {
                     if (!doc.Open(templateDirectory + @"\" + CommonConst.TANABANLABEL_TEMPLATE_FILE))
                     {
@@ -90,7 +90,7 @@ namespace Template.WPF.ViewModels
                         return;
                     }
                 }
-                else //ボーコードあり
+                else //バーコードあり
                 {
                     if (!doc.Open(templateDirectory + @"\" + CommonConst.TANABANLABELB_TEMPLATE_FILE))
                     {

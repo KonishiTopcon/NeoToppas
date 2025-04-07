@@ -18,5 +18,8 @@ namespace Toppas4.Services
         public static string TANABANLABEL_TEMPLATE_FILE = "Tanabantemplate.LBX";
         public static string TANABANLABELB_TEMPLATE_FILE = "Tanabantemplate_b.LBX";
 
+        //棚札
+        public static string TANAFUDA_TEMPLATE_FILE = "Tanafudatemplate.xlsx";
+
     }
 }
