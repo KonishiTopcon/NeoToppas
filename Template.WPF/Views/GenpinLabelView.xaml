@@ -142,7 +142,7 @@ Height="38" Padding="5"  Margin="1" />
                     <!--<ColumnDefinition Width="*" />-->
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="プリント枚数" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                <TextBlock Grid.Column="0" Text="印刷枚数" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
  Height="38" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
                 <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="2"/>
                 <TextBox Grid.Column="1"  FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" 

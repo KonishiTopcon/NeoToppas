@@ -297,7 +297,7 @@ Height="38" Padding="5"  Margin="1" />
 
             <Grid Grid.Row="2">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="作成予定数" Width="170"  Height="25" FontSize="20" TextAlignment="Right"
+                    <TextBlock Text="印刷枚数" Width="170"  Height="25" FontSize="20" TextAlignment="Right"
                Margin="0,0,20,0"/>
                     <Grid Width="300" Height="40" HorizontalAlignment="Left">
                         <TextBox Text="{Binding SearchText.Value}"  

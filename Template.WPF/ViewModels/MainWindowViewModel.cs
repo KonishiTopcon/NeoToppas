@@ -91,7 +91,10 @@ namespace Template.WPF.ViewModels
             {
                 _navigation.NavigateTo<KibanLabelView>();
             }
-            
+            else if (args.Any(a => a == "EtcLabel"))
+            {
+                _navigation.NavigateTo<EtcLabelView>();
+            }
             else
             {
                 _navigation.NavigateTo<DashboardView>();
@@ -183,8 +186,12 @@ namespace Template.WPF.ViewModels
                     if (ActiveView.Value is not KibanLabelView)
                         _navigation.NavigateTo<KibanLabelView>();
                     break;
+                case "EtcLabel":
+                    if (ActiveView.Value is not EtcLabelView)
+                        _navigation.NavigateTo<EtcLabelView>();
+                    break;
 
-                    
+
 
             }
         }

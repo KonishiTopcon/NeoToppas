@@ -74,7 +74,12 @@ namespace Template.WPF.Views
             Process.Start(fullname, "TanafudaPrint");
         }
 
-        
+        private void OpenNewWindow_EtcLabel(object sender, RoutedEventArgs e)
+        {
+            String fullname = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(fullname, "EtcLabel");
+        }
+
         //TODO:画面追加対応
 
 

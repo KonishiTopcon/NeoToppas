@@ -133,6 +133,8 @@ namespace Template.WPF
             services.AddTransient<TanafudaPrintViewModel>();
             services.AddTransient<KibanLabelView>();
             services.AddTransient<KibanLabelViewModel>();
+            services.AddTransient<EtcLabelView>();
+            services.AddTransient<EtcLabelViewModel>();
             //TODO:画面追加対応
         }
     }
