@@ -109,7 +109,7 @@ FontWeight="Normal" Foreground="Black" Command="{Binding DeleteHinmokuBtn2}"/>
             <Grid Grid.Row="7" Margin="00,00,50,0">
                 <StackPanel Orientation="Horizontal">
                     <Button Margin="0,0,0,0" Width="220" Height="40"  Content="印刷用Excel出力" FontSize="25" VerticalAlignment="Center"
-                        Foreground="AliceBlue"   Command="{Binding PDFBtn}"/>
+                        Foreground="AliceBlue"   Command="{Binding ExportExcelBtn}"/>
                     <Button Margin="50,0,0,0" Width="130" Height="40"  Content="キャンセル" FontSize="25" VerticalAlignment="Center"
                         Background="Black" BorderBrush="Black"  Command="{Binding CancelBtn}"/>
                 </StackPanel>

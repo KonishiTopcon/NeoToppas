@@ -40,7 +40,7 @@ namespace Template.WPF.ViewModels
         public ReactiveCommand DeleteHinmokuBtn1 { get; }
         public ReactiveCommand DeleteHinmokuBtn2 { get; }
         public ReactiveCommand CancelBtn { get; }
-        public ReactiveCommand PDFBtn { get; }
+        public ReactiveCommand ExportExcelBtn { get; }
         public TanafudaPrintViewModel(TransitionService contentNavigation)
         {
             hinmoku0.Value = "T47001441A";
@@ -79,7 +79,7 @@ namespace Template.WPF.ViewModels
                 ResetForm();
                 return;
             });
-            PDFBtn = new ReactiveCommand().WithSubscribe(async () =>
+            ExportExcelBtn = new ReactiveCommand().WithSubscribe(async () =>
             {
                 string templatePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates") +
                  @"\" + CommonConst.TANAFUDA_TEMPLATE_FILE;
@@ -100,21 +100,23 @@ namespace Template.WPF.ViewModels
 
                         for (int p = 0; p <= 2; p++)
                         {
-                            var worksheetn = worksheetx.CopyTo(p.ToString());
-                            if (p == 0 && hinmokutext0.Value.Length >= 0)
+                            if (p == 0 && hinmokutext0.Value.Length > 0)
                             {
+                                var worksheetn = worksheetx.CopyTo(p.ToString());
                                 worksheetn.Cell("B1").Value = shelf0.Value;
                                 worksheetn.Cell("A3").Value = hinmoku0.Value;
                                 worksheetn.Cell("C5").Value = hinmokutext0.Value;
                             }
-                            if (p == 1 && hinmokutext1.Value.Length >= 0)
+                            if (p == 1 && hinmokutext1.Value.Length > 0)
                             {
+                                var worksheetn = worksheetx.CopyTo(p.ToString());
                                 worksheetn.Cell("B1").Value = shelf1.Value;
                                 worksheetn.Cell("A3").Value = hinmoku1.Value;
                                 worksheetn.Cell("C5").Value = hinmokutext1.Value;
                             }
-                            if (p == 2 && hinmokutext2.Value.Length >= 0)
+                            if (p == 2 && hinmokutext2.Value.Length > 0)
                             {
+                                var worksheetn = worksheetx.CopyTo(p.ToString());
                                 worksheetn.Cell("B1").Value = shelf2.Value;
                                 worksheetn.Cell("A3").Value = hinmoku2.Value;
                                 worksheetn.Cell("C5").Value = hinmokutext2.Value;

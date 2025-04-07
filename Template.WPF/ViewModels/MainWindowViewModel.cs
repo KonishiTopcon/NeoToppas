@@ -87,6 +87,10 @@ namespace Template.WPF.ViewModels
             {
                 _navigation.NavigateTo<TanafudaPrintView>();
             }
+            else if (args.Any(a => a == "KibanLabel"))
+            {
+                _navigation.NavigateTo<KibanLabelView>();
+            }
             
             else
             {
@@ -175,9 +179,12 @@ namespace Template.WPF.ViewModels
                     if (ActiveView.Value is not TanafudaPrintView)
                         _navigation.NavigateTo<TanafudaPrintView>();
                     break;
+                case "KibanLabel":
+                    if (ActiveView.Value is not KibanLabelView)
+                        _navigation.NavigateTo<KibanLabelView>();
+                    break;
+
                     
-
-
 
             }
         }

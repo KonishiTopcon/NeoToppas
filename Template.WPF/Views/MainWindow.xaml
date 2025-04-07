@@ -74,6 +74,7 @@
                                 <TextBlock Text="①ダッシュボード" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
                             </TreeViewItem.Header>
                         </TreeViewItem>
+                        <!--TODO:画面追加時、click以降修正-->
                         <TreeViewItem Name="Settings">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu>

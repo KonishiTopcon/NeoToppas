@@ -131,7 +131,8 @@ namespace Template.WPF
             services.AddTransient<TanabanPrintViewModel>();
             services.AddTransient<TanafudaPrintView>();
             services.AddTransient<TanafudaPrintViewModel>();
-            
+            services.AddTransient<KibanLabelView>();
+            services.AddTransient<KibanLabelViewModel>();
             //TODO:画面追加対応
         }
     }
