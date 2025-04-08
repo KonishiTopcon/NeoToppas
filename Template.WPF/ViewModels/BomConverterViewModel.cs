@@ -47,7 +47,7 @@ namespace Template.WPF.ViewModels
             {
                 var openFileDialog = new Microsoft.Win32.OpenFileDialog
                 {
-                    Filter = "Excel Files (*.xlsx)|*.xlsx",
+                    Filter = "Excel Files (*.xlsx;*.xls)|*.xlsx;*.xls",
                     Multiselect = false
                 };
                 if (openFileDialog.ShowDialog() == true)
@@ -87,36 +87,18 @@ namespace Template.WPF.ViewModels
                     {
                         workbookx.SaveAs(outputExcelPath);
                     }
-                    using (var workbooky = new XLWorkbook(outputExcelPath))
+                    using (var workbooky = new XLWorkbook(outputExcelPath)) 
                     {
                         var worksheetx = workbooky.Worksheet(1);
-
-                        //for (int p = 0; p <= 2; p++)
-                        //{
-                        //    if (p == 0 && hinmokutext0.Value.Length > 0)
-                        //    {
-                        //        var worksheetn = worksheetx.CopyTo(p.ToString());
-                        //        worksheetn.Cell("B1").Value = shelf0.Value;
-                        //        worksheetn.Cell("A3").Value = hinmoku0.Value;
-                        //        worksheetn.Cell("C5").Value = hinmokutext0.Value;
-                        //    }
-                        //    if (p == 1 && hinmokutext1.Value.Length > 0)
-                        //    {
-                        //        var worksheetn = worksheetx.CopyTo(p.ToString());
-                        //        worksheetn.Cell("B1").Value = shelf1.Value;
-                        //        worksheetn.Cell("A3").Value = hinmoku1.Value;
-                        //        worksheetn.Cell("C5").Value = hinmokutext1.Value;
-                        //    }
-                        //    if (p == 2 && hinmokutext2.Value.Length > 0)
-                        //    {
-                        //        var worksheetn = worksheetx.CopyTo(p.ToString());
-                        //        worksheetn.Cell("B1").Value = shelf2.Value;
-                        //        worksheetn.Cell("A3").Value = hinmoku2.Value;
-                        //        worksheetn.Cell("C5").Value = hinmokutext2.Value;
-                        //    }
-                        //}
-
-                        //worksheetx.Delete();
+                        int i = 2;
+                        foreach (var bom in BomExcelTbl)
+                        {
+                            using (var workbooki = new XLWorkbook(bom.BomPath))
+                            {
+                                worksheetx.Cell("B" + i).Value = workbooki.Worksheet(1).Cell("L5").Value;
+                                i++;
+                            }
+                        }
                         // 保存
                         workbooky.Save();
                         workbooky.Dispose();
