@@ -95,6 +95,11 @@ namespace Template.WPF.ViewModels
             {
                 _navigation.NavigateTo<EtcLabelView>();
             }
+            else if (args.Any(a => a == "BomConverter"))
+            {
+                _navigation.NavigateTo<BomConverterView>();
+            }
+            
             else
             {
                 _navigation.NavigateTo<DashboardView>();
@@ -190,6 +195,11 @@ namespace Template.WPF.ViewModels
                     if (ActiveView.Value is not EtcLabelView)
                         _navigation.NavigateTo<EtcLabelView>();
                     break;
+                case "BomConverter":
+                    if (ActiveView.Value is not BomConverterView)
+                        _navigation.NavigateTo<BomConverterView>();
+                    break;
+                    
 
 
 

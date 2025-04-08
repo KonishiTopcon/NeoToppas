@@ -135,6 +135,9 @@ namespace Template.WPF
             services.AddTransient<KibanLabelViewModel>();
             services.AddTransient<EtcLabelView>();
             services.AddTransient<EtcLabelViewModel>();
+            services.AddTransient<BomConverterView>();
+            services.AddTransient<BomConverterViewModel>();
+            
             //TODO:画面追加対応
         }
     }

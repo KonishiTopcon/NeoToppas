@@ -259,11 +259,11 @@
                         <TreeViewItem Name="BomConverter">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_BomConverter" />
                                 </ContextMenu>
                             </TreeViewItem.ContextMenu>
                             <TreeViewItem.Header >
-                                <TextBlock Text="②Excel構成表変換" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                                <TextBlock Text="②部品構成表変換" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
                             </TreeViewItem.Header>
                         </TreeViewItem>
                     </TreeViewItem>

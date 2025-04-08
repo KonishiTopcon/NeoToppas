@@ -20,6 +20,7 @@ namespace Toppas4.Services
 
         //棚札
         public static string TANAFUDA_TEMPLATE_FILE = "Tanafudatemplate.xlsx";
-
+        //BOM
+        public static string BOM_TEMPLATE_FILE = "BomForSAPtemplate.xlsx";
     }
 }
