@@ -44,13 +44,13 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="バーコード有無" Width="150"  Height="25" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            <TextBlock Grid.Row="0" Text="バーコード印刷" Width="150"  Height="25" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
             <Grid Grid.Row="1" Margin="20,0,0,0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="有" Width="100"  Height="25" FontSize="20" TextAlignment="Right"/>
+                    <TextBlock Text="無し" Width="100"  Height="25" FontSize="20" TextAlignment="Right"/>
                     <ToggleButton Width="40" Height="20" Margin="10,0,0,0" Style="{StaticResource MaterialDesignSwitchToggleButton}"
                                   IsChecked="{Binding BarcodeExist.Value}"/>
-                    <TextBlock Text="無" Width="100"  Height="25" FontSize="20" TextAlignment="Left"/>
+                    <TextBlock Text="有り" Width="100"  Height="25" FontSize="20" TextAlignment="Left"/>
                 </StackPanel>
             </Grid>
             <StackPanel Grid.Row="2" Orientation="Horizontal">

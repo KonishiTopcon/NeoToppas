@@ -249,11 +249,11 @@ namespace Template.WPF.ViewModels
                         sr.Close();
                         //現在の実行ファイルののバージョン確認
                         StreamReader sr2 = new StreamReader(Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE);
-                        string str2;
-                        str2 = sr2.ReadLine();
+                        //string str2;
+                        CommonConst.AppVersion = sr2.ReadLine();
                         sr2.Close();
 
-                        if (str == str2)
+                        if (str == CommonConst.AppVersion)
                         {
                         }
                         else

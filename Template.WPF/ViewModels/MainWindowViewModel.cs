@@ -2,10 +2,12 @@
 using MaterialDesignThemes.Wpf;
 using Reactive.Bindings;
 using System.ComponentModel;
+using System.IO;
 using System.Linq.Expressions;
 using System.Windows;
 using Template.WPF.Services;
 using Template.WPF.Views;
+using Toppas4.Services;
 
 namespace Template.WPF.ViewModels
 {
@@ -99,10 +101,14 @@ namespace Template.WPF.ViewModels
             {
                 _navigation.NavigateTo<BomConverterView>();
             }
-            
             else
             {
                 _navigation.NavigateTo<DashboardView>();
+            }
+
+            if (Toppas4.Properties.Settings.Default.AUTOUPDATE_ENABLE) //CommonConst.AUTOUPDATE_ENABLE
+            {
+                Update(); //プログラムの自動アップデート
             }
         }
 
@@ -120,6 +126,57 @@ namespace Template.WPF.ViewModels
         {
             // クローズ時の処理をここに記述
         }
+
+        private void Update()
+        {
+            if (args.Any(a => a == "/up") == false)
+            {
+                ApplicationUpdate update = new();
+
+                if (!Directory.Exists(Toppas4.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER)) //CommonConst.AUTOUPDATE_DATA_FOLDER
+                {
+                    MessageBox.Show("自動アップデート失敗！\r\n最新アプリの格納フォルダにアクセスできません！！", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    if (!File.Exists((Toppas4.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER).ToString() + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE)) //if (!File.Exists(Directory.GetParent(CommonConst.AUTOUPDATE_DATA_FOLDER).ToString() + @"\NeoToppasLatestVersionTXT.txt"))
+                    {
+                        MessageBox.Show("自動アップデート失敗！\r\n最新バージョン情報ファイルにアクセスできません！！", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        //ファイルサーバ上のバージョン確認
+                        StreamReader sr = new StreamReader(Toppas4.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE);
+                        string str;
+                        str = sr.ReadLine();
+                        sr.Close();
+                        //現在の実行ファイルののバージョン確認
+                        StreamReader sr2 = new StreamReader(Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + CommonConst.AUTOUPDATE_VERSION_FILE);
+                        //string str2;
+                        CommonConst.AppVersion = sr2.ReadLine();
+                        sr2.Close();
+
+                        if (str == CommonConst.AppVersion)
+                        {
+                        }
+                        else
+                        {
+                            if (update.Update(Toppas4.Properties.Settings.Default.AUTOUPDATE_DATA_FOLDER, null) == true)
+                            {
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (var f in Directory.GetFiles(Environment.CurrentDirectory, "*.delete"))
+                {
+                    File.Delete(f);
+                }
+            }
+        }
+
 
         private void OnSidebarTextMouseUp()
         {

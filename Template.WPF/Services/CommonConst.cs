@@ -22,5 +22,7 @@ namespace Toppas4.Services
         public static string TANAFUDA_TEMPLATE_FILE = "Tanafudatemplate.xlsx";
         //BOM
         public static string BOM_TEMPLATE_FILE = "BomForSAPtemplate.xlsx";
+
+        public static string AppVersion;
     }
 }

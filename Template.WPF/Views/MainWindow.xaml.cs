@@ -82,7 +82,7 @@ namespace Template.WPF.Views
         private void OpenNewWindow_BomConverter(object sender, RoutedEventArgs e)
         {
             String fullname = Process.GetCurrentProcess().MainModule.FileName;
-            Process.Start(fullname, "EtcLabel");
+            Process.Start(fullname, "BomConverter");
         }
         
         //TODO:画面追加対応

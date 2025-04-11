@@ -41,8 +41,11 @@ namespace Template.WPF.ViewModels
         public ReactiveCommand DeleteHinmokuBtn2 { get; }
         public ReactiveCommand CancelBtn { get; }
         public ReactiveCommand ExportExcelBtn { get; }
-        public TanafudaPrintViewModel(TransitionService contentNavigation)
+
+        private readonly MessageService _message;
+        public TanafudaPrintViewModel(TransitionService contentNavigation, MessageService message, DialogService dialogService)
         {
+            _message = message;
             hinmoku0.Value = "T47001441A";
             hinmoku1.Value = "T47001441B";
             hinmoku2.Value = "T47001441C";
@@ -140,8 +143,10 @@ namespace Template.WPF.ViewModels
 
                     // Excelアプリケーションを起動し、ファイルパスを引数として渡す
                     Process.Start(excelAppPath, outputExcelPath);
-                    System.Windows.MessageBox.Show("棚札印刷用のエクセルを開きます。" + Environment.NewLine +
+                    _message.ShowSnackbar("棚札印刷用のエクセルを開きます。" + Environment.NewLine +
                         "印刷範囲を「ブック全体」として印刷してください。");
+                    //System.Windows.MessageBox.Show("棚札印刷用のエクセルを開きます。" + Environment.NewLine +
+                    //    "印刷範囲を「ブック全体」として印刷してください。");
                 }
                catch {
                     System.Windows.MessageBox.Show("エクセルファイルを開けませんでした", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
