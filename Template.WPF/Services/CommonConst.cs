@@ -23,6 +23,8 @@ namespace Toppas4.Services
         //BOM
         public static string BOM_TEMPLATE_FILE = "BomForSAPtemplate.xlsx";
 
+        public static string SHIPPINGLIST_TEMPLATE_FILE = "ShippingListtemplate.xlsm";
+
         public static string AppVersion;
     }
 }

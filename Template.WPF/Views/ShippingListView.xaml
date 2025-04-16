@@ -26,38 +26,31 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Grid Grid.Row="2" Margin="50,50,50,0">
+        <Grid Grid.Row="2" Margin="10,0,10,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="*" />
                 <RowDefinition Height="10" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
                 <RowDefinition Height="40" />
 
                 <RowDefinition Height="10" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <!-- ラベル部分 -->
-                    <TextBlock Text="構成情報ファイル" FontSize="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <!-- ファイル選択ボタン -->
-                    <Button Content="ファイル選択" Width="150" Height="30" VerticalAlignment="Center" Margin="50,0,0,0" Command="{Binding FileSelectButton}"/>
-                    <Button Content="選択ファイル削除" Width="150" Height="30" VerticalAlignment="Center" Margin="50,0,0,0" Command="{Binding FileDelButton}"
-                            Background="Black" BorderBrush="Black"/>
-                </StackPanel>
-            </Grid>
-            <DataGrid x:Name="BomDataGrid" 
+            
+            <DataGrid x:Name="ShippingListDataGrid" 
                       Grid.Row="2" 
-                      ItemsSource="{Binding BomExcelTbl}" 
+                      ItemsSource="{Binding ShippingListTbl}" 
                       Margin="20,0,20,20"  
                       AutoGenerateColumns="False"  
-                      IsReadOnly="True"
-                      SelectedItem="{Binding SelectedBom, Mode=TwoWay}" 
+                      SelectedItem="{Binding SelectedShippingList, Mode=TwoWay}" 
                       Background="White" 
                       BorderThickness="3" 
                       BorderBrush="Gray" 
                       HorizontalGridLinesBrush="Gray" 
-                      VerticalGridLinesBrush="Gray">
+                      VerticalGridLinesBrush="Gray"
+                      RowHeight="35"
+                      
+                      CanUserAddRows="False">
                 <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#AAAAAA"/>
@@ -66,13 +59,38 @@
                 </DataGrid.ColumnHeaderStyle>
                 <!-- カラム定義 -->
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ファイル名"  Binding="{Binding BomName}" Width="*" />
-                    <DataGridTextColumn Header="ファイルパス" Binding="{Binding BomPath}" Width="*" />
+                    <DataGridTextColumn Header="ユニットコード"  Binding="{Binding UnitCode}"  Width="2*" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="名称" Binding="{Binding UnitName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="2*" IsReadOnly="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Background" Value="LightGray" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="出荷台数" Binding="{Binding ShippingCnt}" Width="*" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="備考" Binding="{Binding Bikou}" Width="2*" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="ページ" Binding="{Binding Page, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Background" Value="LightGray" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="出荷登録台数" Binding="{Binding RegisteredCnt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Background" Value="LightGray" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+
                 </DataGrid.Columns>
             </DataGrid>
-            <Grid Grid.Row="4" Margin="20,00,50,0">
+            <Grid Grid.Row="4" Margin="20,0,50,0">
                 <StackPanel Orientation="Horizontal">
-                    <Button Margin="0,0,0,0" Width="130" Height="40"  Content="変換" FontSize="25" VerticalAlignment="Center"
+                    <Button Margin="0,0,0,0" Width="160" Height="40"  Content="エクセル出力" FontSize="25" VerticalAlignment="Center"
                         Foreground="AliceBlue"   Command="{Binding ConvertButton}"/>
                     <Button Margin="50,0,0,0" Width="130" Height="40"  Content="キャンセル" FontSize="25" VerticalAlignment="Center"
                         Background="Black" BorderBrush="Black"  Command="{Binding CancelButton}"/>

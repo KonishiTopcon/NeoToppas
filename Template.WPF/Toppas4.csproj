@@ -23,6 +23,7 @@
     <None Remove="Templates\BomForSAPtemplate.xlsx" />
     <None Remove="Templates\Genpintemplate1.lbx" />
     <None Remove="Templates\KonpouMeisaiTemplate.xlsm" />
+    <None Remove="Templates\ShippingListTemplate.xlsm" />
     <None Remove="Templates\Tanabantemplate.lbx" />
     <None Remove="Templates\Tanabantemplate_b.lbx" />
     <None Remove="Templates\Tanafudatemplate.xlsx" />
@@ -68,7 +69,7 @@
     <Content Include="Templates\Genpintemplate1.lbx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\KonpouMeisaiTemplate.xlsm">
+    <Content Include="Templates\ShippingListTemplate.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Tanabantemplate.lbx">

@@ -185,29 +185,5 @@ namespace Template.WPF.ViewModels
         }
 
 
-        //public string ConvertXlsToXlsx(string xlsPath)
-        //{
-        //    var excelApp = new Excel.Application();
-        //    Workbooks workbooks = excelApp.get_Workbooks();
-        //    string xlsxPath = xlsPath + "x";
-
-        //    try
-        //    {
-        //        excelApp = new Excel.Application();
-        //        Excel.Workbook workbook = workbooks.Open(xlsPath, ReadOnly: false, Editable: true, CorruptLoad: Excel.XlCorruptLoad.xlNormalLoad);
-        //        workbook.SaveAs2(xlsxPath, Excel.XlFileFormat.xlOpenXMLWorkbook);
-        //        workbook.Close();
-
-        //    }
-        //    finally
-        //    {
-        //        workbooks?.Close();
-        //        excelApp.Quit();
-        //    }
-
-        //    return xlsxPath;
-        //}
-
-
     }
 }
