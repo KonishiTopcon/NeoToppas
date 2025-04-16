@@ -101,6 +101,10 @@ namespace Template.WPF.ViewModels
             {
                 _navigation.NavigateTo<BomConverterView>();
             }
+            else if (args.Any(a => a == "ShippingList"))
+            {
+                _navigation.NavigateTo<ShippingListView>();
+            }
             else
             {
                 _navigation.NavigateTo<DashboardView>();
@@ -256,7 +260,11 @@ namespace Template.WPF.ViewModels
                     if (ActiveView.Value is not BomConverterView)
                         _navigation.NavigateTo<BomConverterView>();
                     break;
-                    
+                case "ShippingList":
+                    if (ActiveView.Value is not ShippingListView)
+                        _navigation.NavigateTo<ShippingListView>();
+                    break;
+
 
 
 

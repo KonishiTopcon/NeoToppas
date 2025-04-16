@@ -137,7 +137,8 @@ namespace Template.WPF
             services.AddTransient<EtcLabelViewModel>();
             services.AddTransient<BomConverterView>();
             services.AddTransient<BomConverterViewModel>();
-            
+            services.AddTransient<ShippingListView>();
+            services.AddTransient<ShippingListViewModel>();
             //TODO:画面追加対応
         }
     }

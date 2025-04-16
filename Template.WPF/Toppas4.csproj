@@ -22,6 +22,7 @@
     <None Remove="Image\Toppas4.ico" />
     <None Remove="Templates\BomForSAPtemplate.xlsx" />
     <None Remove="Templates\Genpintemplate1.lbx" />
+    <None Remove="Templates\KonpouMeisaiTemplate.xlsm" />
     <None Remove="Templates\Tanabantemplate.lbx" />
     <None Remove="Templates\Tanabantemplate_b.lbx" />
     <None Remove="Templates\Tanafudatemplate.xlsx" />
@@ -65,6 +66,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Genpintemplate1.lbx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\KonpouMeisaiTemplate.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Tanabantemplate.lbx">

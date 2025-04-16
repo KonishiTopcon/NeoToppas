@@ -84,7 +84,11 @@ namespace Template.WPF.Views
             String fullname = Process.GetCurrentProcess().MainModule.FileName;
             Process.Start(fullname, "BomConverter");
         }
-        
+        private void OpenNewWindow_ShippingList(object sender, RoutedEventArgs e)
+        {
+            String fullname = Process.GetCurrentProcess().MainModule.FileName;
+            Process.Start(fullname, "ShippingList");
+        }
         //TODO:画面追加対応
 
 

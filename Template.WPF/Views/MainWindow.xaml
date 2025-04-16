@@ -191,7 +191,7 @@
                         <TreeViewItem Name="ShippingList">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_ShippingList" />
                                 </ContextMenu>
                             </TreeViewItem.ContextMenu>
                             <TreeViewItem.Header >
