@@ -35,8 +35,8 @@
                              Checked="RadioVersionChange"/>
                 <RadioButton Content="連続ラベル" FontSize="20" Width="150" IsChecked="{Binding RadioSequence.Value}"
                              Checked="RadioSequenceChange"/>
-                <RadioButton Content="BT-53Q" FontSize="20" Width="150" IsChecked="{Binding RadioBT53Q.Value}"
-                             Checked="RadioBT53QChange"/>
+                <!--<RadioButton Content="BT-53Q" FontSize="20" Width="150" IsChecked="{Binding RadioBT53Q.Value}"
+                             Checked="RadioBT53QChange"/>-->
                 <RadioButton Content="3DOCT-STEP2" FontSize="20" Width="150" IsChecked="{Binding Radio3DOCT.Value}"
              Checked="Radio3DOCTChange"/>
             </StackPanel>
@@ -252,7 +252,7 @@ Height="38" Width="150" Padding="5" Margin="1" Background="LightGray"/>
         </Grid>
 
 
-        <!--★BT53Qラベルの選択時★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★-->
+        <!--★BT53Qラベルの選択時★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★--><!--
         <Grid Grid.Row="4" Visibility="{Binding BT53QVisible.Value}" Margin="50,30,50,0">
             <Grid.RowDefinitions >
                 <RowDefinition Height="40" />
@@ -313,7 +313,7 @@ Height="35"   Margin="10,0,1,1"  Width="100"  Text="{Binding NumberOfPartsReceiv
             Background="Black" BorderBrush="Black"  Command="{Binding CancelBtn}"/>
                 </StackPanel>
             </Grid>
-        </Grid>
+        </Grid>-->
 
         <!--★BT53Qラベルの選択時★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★-->
         <Grid Grid.Row="4" Visibility="{Binding OCTVisible.Value}" Margin="50,30,50,0">

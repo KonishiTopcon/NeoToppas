@@ -175,7 +175,7 @@
                                         <Path Data="M18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5M19.5,9.5L21.46,12H17V9.5M6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5M20,8H17V4H3C1.89,4 1,4.89 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8Z"   Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
                                     </Canvas>
                                 </Viewbox>
-                                <TextBlock Text="4.出荷計画" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="{Binding TreeFont1.Value}" />
+                                <TextBlock Text="4.出荷" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="{Binding TreeFont1.Value}" />
                             </StackPanel>
                         </TreeViewItem.Header>
                         <TreeViewItem Name="ShippingPlan">
@@ -186,6 +186,16 @@
                             </TreeViewItem.ContextMenu>
                             <TreeViewItem.Header >
                                 <TextBlock Text="①出荷計画" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        <TreeViewItem Name="ShippingList">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新しいウインドウで開く" Click="OpenNewWindow_PartsLabelPrint" />
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                            <TreeViewItem.Header >
+                                <TextBlock Text="②梱包明細印刷" VerticalAlignment="Center" Margin="8,0,0,0"  FontSize="{Binding TreeFont2.Value}"/>
                             </TreeViewItem.Header>
                         </TreeViewItem>
                     </TreeViewItem>
