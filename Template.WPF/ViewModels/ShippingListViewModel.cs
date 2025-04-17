@@ -20,6 +20,7 @@ using Microsoft.Office.Interop.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using MaterialDesignThemes.Wpf;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Template.WPF.ViewModels
 {
@@ -66,48 +67,51 @@ namespace Template.WPF.ViewModels
                     using (var workbooky = new XLWorkbook(outputExcelPath)) 
                     {
                         var worksheetx = workbooky.Worksheet(1);
-                        int r_out = 2; //書き込み行番号 
+                        string pcName = Environment.MachineName;
+                        DateTime now = DateTime.Now;
+                        string datetimeStr = now.ToString("yyyyMMddHHmmss");
+                        long datetimeNum = long.Parse(datetimeStr);
+                        string hexStr = datetimeNum.ToString("X");
+                        worksheetx.Cell("D11").Value = hexStr + "1";
+                        worksheetx.Cell("D32").Value = hexStr + "2";
+                        int p1 = 0;
+                        int p2 = 0;
                         foreach (var ship in ShippingListTbl)
                         {
-                            int MeisaiNo = 10;
-                            //using (var workbooki = new XLWorkbook(ship.BomPath))
-                            //{
-                            //    foreach (var s in workbooki.Worksheets)
-                            //    {
-                            //        if (s.Name.StartsWith("差分"))
-                            //        {
-                            //            continue;
-                            //        }
-                                    
-                            //        int r = 12; //読み込み行番号 
-                            //        while (s.Cell("E"+ r).Value.ToString() != "")
-                            //        {
-                            //            if (s.Cell("G" + r).Value.ToString() != "")
-                            //            {
-                            //                worksheetx.Cell("A" + r_out).Value = "M";
-                            //                worksheetx.Cell("B" + r_out).Value = s.Cell("L5").Value;
-                            //                worksheetx.Cell("C" + r_out).Value = "5335";
-                            //                worksheetx.Cell("D" + r_out).Value = "1";
-                            //                worksheetx.Cell("E" + r_out).Value = "1";
-                            //                worksheetx.Cell("H" + r_out).Value = "1";
-                            //                worksheetx.Cell("I" + r_out).Value = "MIG110001";
-                            //                worksheetx.Cell("J" + r_out).Value = DateTime.Today.ToString("yyyyMMdd");
-                            //                worksheetx.Cell("K" + r_out).Value = MeisaiNo;
-                            //                worksheetx.Cell("L" + r_out).Value = "L";
-                            //                worksheetx.Cell("M" + r_out).Value = s.Cell("G" + r).Value;
-                            //                worksheetx.Cell("N" + r_out).Value = s.Cell("J" + r).Value;
-                            //                worksheetx.Cell("O" + r_out).Value = "EA";
-                            //                worksheetx.Cell("S" + r_out).Value = "1000";
-                            //                ++r_out;
-                            //                MeisaiNo = MeisaiNo + 10;
-                            //            }
-                            //            r++;
-                            //        }
-                            //    }
-                            //}
+                            worksheetx.Cell("D2").Value = DateTime.Today;
+                            worksheetx.Cell("D23").Value = DateTime.Today;
+
+                            if (!string.IsNullOrWhiteSpace(ship.UnitName))
+                            {
+                                if (ship.Page == 1)
+                                {
+                                    worksheetx.Range("A" + (p1 + 5).ToString()).Value = ship.UnitCode;
+                                    worksheetx.Range("B" + (p1 + 5).ToString()).Value = ship.UnitName;
+                                    worksheetx.Range("C" + (p1 + 5).ToString()).Value = ship.ShippingCnt;
+                                    worksheetx.Range("D" + (p1 + 5).ToString()).Value = ship.Bikou;
+                                    ++p1;
+                                } 
+                                else
+                                {
+                                    worksheetx.Range("A" + (p2 + 26).ToString()).Value = ship.UnitCode;
+                                    worksheetx.Range("B" + (p2 + 26).ToString()).Value = ship.UnitName;
+                                    worksheetx.Range("C" + (p2 + 26).ToString()).Value = ship.ShippingCnt;
+                                    worksheetx.Range("D" + (p2 + 26).ToString()).Value = ship.Bikou;
+                                    ++p2;
+                                }
+
+                            }
+                            worksheetx.PageSetup.PrintAreas.Clear();
+
+                            if (p2 > 0)
+                            {
+                                worksheetx.PageSetup.PrintAreas.Add("A1:D42");
+                            }
+                            else worksheetx.PageSetup.PrintAreas.Add("A1:D21");
                         }
                         // 保存
                         workbooky.Save();
+                        if (p2 <= 0 && p1 <= 0) return;
                     }
                 }
                 catch
@@ -116,14 +120,14 @@ namespace Template.WPF.ViewModels
                         "エクセルファイルが開かれている場合は閉じてリトライしてください。", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+                
                 try
                 {
                     string excelAppPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Microsoft Office", "root", "Office16", "EXCEL.EXE");
 
                     // Excelアプリケーションを起動し、ファイルパスを引数として渡す
                     Process.Start(excelAppPath, outputExcelPath);
-                    _message.ShowSnackbar("SAP登録用のエクセルを開きます。");
-                    //System.Windows.MessageBox.Show("SAP登録用のエクセルを開きます。");
+                    _message.ShowSnackbar("梱包明細のエクセルを開きます。");
                 }
                 catch
                 {
@@ -135,25 +139,27 @@ namespace Template.WPF.ViewModels
 
             CancelButton = new ReactiveCommand().WithSubscribe(async () =>
             {
-                ShippingListTbl.Clear();
-                for (int s = 0; s < 12; s++)
-                {
-                    if (s < 6)
-                    {
-                        ShippingListTbl.Add(new ShippingListEntities
-                        {
-                            Page = 1
-                        });
-                    }
-                    else
-                    {
-                        ShippingListTbl.Add(new ShippingListEntities
-                        {
-                            Page = 2
-                        });
-                    }
-                }
+                ResetDatagrid();
             });
+
+            ResetDatagrid();
+        }
+
+        private void ResetDatagrid()
+        {
+            ShippingListTbl.Clear();
+            for (int s = 0; s < 12; s++)
+            {
+                var entity = new ShippingListEntities
+                {
+                    Page = (s < 6) ? 1 : 2
+                };
+
+                // 変更監視を追加
+                entity.PropertyChanged += ShippingItem_PropertyChanged;
+
+                ShippingListTbl.Add(entity);
+            }
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -161,5 +167,21 @@ namespace Template.WPF.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void ShippingItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (sender is ShippingListEntities item && e.PropertyName == nameof(item.UnitCode))
+            {
+                if (!string.IsNullOrWhiteSpace(item.UnitCode))
+                {
+                    var index = ShippingListTbl.IndexOf(item);
+                    item.UnitName = $"{item.UnitCode}{index}";
+                    item.RegisteredCnt = 777;
+                }
+                else
+                {
+                    item.UnitName = string.Empty;
+                }
+            }
+        }
     }
 }

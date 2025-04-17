@@ -55,7 +55,7 @@
             </Grid>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock  Text="品目コード" Width="200"  Height="25" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <TextBlock  Text="品目テキスト" Width="200"  Height="25" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock  Text="品目名称" Width="200"  Height="25" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <TextBlock  Text="棚番号" Width="200"  Height="25" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             </StackPanel>
             

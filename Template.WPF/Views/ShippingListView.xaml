@@ -60,7 +60,7 @@
                 <!-- カラム定義 -->
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ユニットコード"  Binding="{Binding UnitCode}"  Width="2*" IsReadOnly="False"/>
-                    <DataGridTextColumn Header="名称" Binding="{Binding UnitName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="2*" IsReadOnly="True">
+                    <DataGridTextColumn Header="ユニット名称" Binding="{Binding UnitName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="2*" IsReadOnly="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Background" Value="LightGray" />
@@ -90,7 +90,7 @@
             </DataGrid>
             <Grid Grid.Row="4" Margin="20,0,50,0">
                 <StackPanel Orientation="Horizontal">
-                    <Button Margin="0,0,0,0" Width="160" Height="40"  Content="エクセル出力" FontSize="25" VerticalAlignment="Center"
+                    <Button Margin="0,0,0,0" Width="220" Height="40"  Content="印刷用Excel出力" FontSize="25" VerticalAlignment="Center"
                         Foreground="AliceBlue"   Command="{Binding ConvertButton}"/>
                     <Button Margin="50,0,0,0" Width="130" Height="40"  Content="キャンセル" FontSize="25" VerticalAlignment="Center"
                         Background="Black" BorderBrush="Black"  Command="{Binding CancelButton}"/>

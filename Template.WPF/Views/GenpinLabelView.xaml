@@ -92,7 +92,7 @@ Height="38" Padding="5"  Margin="1" />
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="品目テキスト" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                <TextBlock Grid.Column="0" Text="品目名称" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
  Height="40" Width="150" Padding="5"  Margin="1" Background="LightGray"/>
                 <TextBlock Grid.Column="1" Text="{Binding ItemName.Value}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
 Height="40" Padding="5"  Margin="1" />
