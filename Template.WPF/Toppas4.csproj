@@ -11,15 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="新しいフォルダー\**" />
-    <EmbeddedResource Remove="新しいフォルダー\**" />
-    <None Remove="新しいフォルダー\**" />
-    <Page Remove="新しいフォルダー\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Image\dash.png" />
     <None Remove="Image\Toppas4.ico" />
+    <None Remove="Manuals\操作手順書_Toppas4_rev1.0【作成中】.pdf" />
     <None Remove="Templates\BomForSAPtemplate.xlsx" />
     <None Remove="Templates\Genpintemplate1.lbx" />
     <None Remove="Templates\KonpouMeisaiTemplate.xlsm" />
@@ -63,6 +57,9 @@
     <Resource Include="Image\dash.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Manuals\操作手順書_Toppas4_rev1.0【作成中】.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\BomForSAPtemplate.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

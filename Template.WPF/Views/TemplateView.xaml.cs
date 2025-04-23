@@ -19,19 +19,17 @@ namespace Template.WPF.Views
     /// <summary>
     /// LicenseView.xaml の相互作用ロジック
     /// </summary>
-    public partial class DashboardView : UserControl
+    public partial class TemplateView : UserControl
     {
-        DashboardViewModel DViewModel = null!;
-        public DashboardView(DashboardViewModel viewModel)
+        public TemplateView(TemplateViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
-            DViewModel = viewModel;
         }
 
-        private void OpenUsersManual(object sender, MouseButtonEventArgs e)
+        private void xxx(object sender, MouseButtonEventArgs e)
         {
-            DViewModel.OpenUsersManual();
+
         }
     }
 }
